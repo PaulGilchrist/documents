@@ -229,7 +229,7 @@ In the example below, a user is being associated to a userDetail.
          kernel.Bind<IApiRepository>().To<ApiRepository>();
          kernel.Bind<ApiContext>().To<ApiContext>();
          ```
-   * The API layer can translate the model from data specific to API specific and back again passing them through the repositories.   
+   * The API layer can translate the model from data specific to API specific and back again passing them through the repositories.
 * Do not just use a single DbContext and Repository for the entire database but rather bounded contexts to different areas of data when nesting of related data ($expand) is not needed.  This keeps each context more manageable and the application more scalable.  A single database can still be used, and single tables can be accessible through multiple contexts.  Example: Customer table would be in both the sales and warranty contexts.
    * This is not alweays possible when using OData as its $expand capability can not cross DbContexts, and is a key capability for performant nested data access.
 
