@@ -131,4 +131,4 @@ providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, }
 ]
 ```
-4.	Optionally create a response intercept following the same method that can watch for a 401 Unauthorized and login the user and retry the HTTP request
+4.	Optionally create a response intercept following the same method that can watch for a ```401 Unauthorized``` and login the user and retry the HTTP request
