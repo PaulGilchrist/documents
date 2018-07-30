@@ -29,7 +29,7 @@ This document discusses the issues and solutions around caching an API including
  
 ## Code Example
 
-   ```C
+   ```cs
    [HttpGet]
    [Route("cacheDemo", Name = "CacheDemo")]
    public HttpResponseMessage Get() {
@@ -78,7 +78,7 @@ This document discusses the issues and solutions around caching an API including
          ? String.Format("{0}?{1}", pagePathWithoutQueryString, newQueryString)
          : pagePathWithoutQueryString;
 }
- 
+
    public class CacheValue {
       public object Data { get; set; }
       public DateTimeOffset AbsoluteExpiration { get; set; }
