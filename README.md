@@ -2,13 +2,13 @@
 
 ## Completed
 
-- [x] Angular Azure SSO Authentication and Authorization
-- [x] GIT Usage in VSCode or Visual Studio
-- [x] API Caching
+- [x] [Angular Azure SSO Authentication and Authorization](https://github.com/PaulGilchrist/documents/blob/master/angular-azure-sso-authentication-and-authorization.md)
+- [x] [GIT Usage in VSCode or Visual Studio](https://github.com/PaulGilchrist/documents/blob/master/git-usage-in-vscode-or-visual-studio.md)
+- [x] [API Caching](https://github.com/PaulGilchrist/documents/blob/master/api-caching.md)
 
 ## Drafts
 
-- [x] REST API Design Recomendations
+- [x] [REST API Design Recomendations](https://github.com/PaulGilchrist/documents/blob/master/rest-api-design-recommendations.md)
 
 ## Needed
 
