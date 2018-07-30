@@ -83,3 +83,9 @@ Many of the below commands can be done from a GUI interface like VS Code, Visual
 
 [More Info](https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html)
 
+## Git Version Control Branching Recomendations
+
+It is recommended to follow a hybrid approach between [git-flow](http://nvie.com/posts/a-successful-git-branching-model) and [github-hub](http://scottchacon.com/2011/08/31/github-flow.html), mainly sticking to the git-flow model only because of an existing strategy around continuous integration with multiple the multiple environments (dev, qa, staing, and production). Like git-flow, there will be a branch maintained for each permanent hosting environment (usually dev, qa. staging, and production). If you have read git-flow, the “qa” and “staging” branches can be thought of as that document’s “release” branches. The production branch will always be called “master” and it should always be in a production ready state. Anytime an environment branch is updated, continuous integration should immediately update its respective hosting environment.
+
+New feature branches should be created from the “dev” branch and merged back into the “dev” branch when ready for integration testing. When QA is ready to test a new release, the “dev” branch can be merged into the “qa” branch. Any bugs found in QA would be fixed in its own branch cloned from “qa”, and when complete pushed back to both the “qa” and “dev” branches. Likewise, any bugs fixed in the “master” branch would have to also be merged into the other environment branches.
+
