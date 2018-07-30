@@ -73,16 +73,16 @@ The API features discussed in the remainder of this document are focused on thes
 * Example of resource containing sub resources
 
    ```json
-   { 
-        "url":"https://api.<company-name>.com/users/1051"
-        "firstName":"Paul"
-        "lastName":"Gilchrist"
-		"email": "paul.gilchrist@outlook.com"
-        "addresses": [
-             "https://api.<company-name>.com/users/1051/addresses/912"
-             "https://api.<company-name>.com/users/1051/addresses/913"
-             "https://api.<company-name>.com/users/1051/addresses/914"
-        ]
+   {
+      "url": "https://api.<company-name>.com/users/1051",
+      "firstName": "Paul",
+      "lastName": "Gilchrist",
+      "email": "paul.gilchrist@outlook.com",
+      "addresses": [
+         "https://api.<company-name>.com/users/1051/addresses/912",
+         "https://api.<company-name>.com/users/1051/addresses/913",
+         "https://api.<company-name>.com/users/1051/addresses/914"
+      ]
    }
    ```
 
