@@ -63,4 +63,4 @@ Additional OData Best Practices
 * Do not hardcode capabilities into the controller, repository, or SQL procedure that can be controlled by OData such as sorting.  An exception to this may be filtering of objects or properties based on security roles.
 
 ## References
-* ASP.NET Core OData now Available
+*[] ASP.NET Core OData now Available](https://blogs.msdn.microsoft.com/odatateam/2018/07/03/asp-net-core-odata-now-available/)
