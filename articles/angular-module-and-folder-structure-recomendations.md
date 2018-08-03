@@ -16,7 +16,3 @@ The `app.module` should contain as little as possible, and is usually limited to
 Within any components folder would be separate folders for each component.  This separation is due to each component usually being made up of multiple files such as class, spec, HTML, and styles files.
 
 Jasmine unit test spec files are contained in the same folder as the code being tested meeting with Angular best practice, and keeping the component or service more portable.  Angular will automatically discover all spec files and include them in unit testing when running `ng test`
-
-
-
-
