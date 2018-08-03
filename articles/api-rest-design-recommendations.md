@@ -1,4 +1,4 @@
-# REST API Design Recommendations
+# API REST Design Recommendations
 
 ## Executive Summary & Scope
 
