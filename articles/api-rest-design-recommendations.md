@@ -36,19 +36,19 @@ The API features discussed in the remainder of this document are focused on thes
    * Test Driven Development helps with versioning so as a new version is introduced, the old version scripts still exists to ensure nothing breaks.
 * Must return data in JavaScript default of camelCase and not the .Net format of PascalCase.  .Net can achieve this automatically when configured as follows:
 
-   ```cs
-   var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().FirstOrDefault();
-   jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-   ```
+```cs
+var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().FirstOrDefault();
+jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+```
 
 * Do not use underscores for property or function names as they are unconventional for JavaScript
 * Resources containing timestamps should ensure the time zone is UTC and the format follows the ISO 8601 standard.  Example: `2014-12-01T18:02:24.343Z`
    * JSON.Net will default to ISO 8601, but the following line will be needed in `Application_Start` to ensure consistent UTC timezone:
 
-      ```cs
-      GlobalConfiguration.Configuration.Formatters.JsonFormatter
-      SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc
-      ```
+```cs
+GlobalConfiguration.Configuration.Formatters.JsonFormatter
+SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc
+```
 
 * Consistent HTTP codes will be returned from all endpoints.  This can be handled by having all endpoints return an `HttpResponseMessage` or `IActionResult` object that includes not just the returned resource, but also additional headers and status information.
    * `200 (ok)` - on successful get, update or delete (not on post - see below)
@@ -72,19 +72,19 @@ The API features discussed in the remainder of this document are focused on thes
 * Every resource obtained from the API will return a URL that points to itself.  This URL will be globally unique and used to identifiy the resource rather than returning an ID parameter.  This allows the flexibility for the API path to change when the new path is not hard coded in the client, but passed back from the API itself.
 * Example of resource containing sub resources
 
-   ```json
-   {
-      "url": "https://api.<company-name>.com/users/1051",
-      "firstName": "Paul",
-      "lastName": "Gilchrist",
-      "email": "paul.gilchrist@outlook.com",
-      "addresses": [
-         "https://api.<company-name>.com/users/1051/addresses/912",
-         "https://api.<company-name>.com/users/1051/addresses/913",
-         "https://api.<company-name>.com/users/1051/addresses/914"
-      ]
-   }
-   ```
+```json
+{
+	"url": "https://api.<company-name>.com/users/1051",
+	"firstName": "Paul",
+	"lastName": "Gilchrist",
+	"email": "paul.gilchrist@outlook.com",
+	"addresses": [
+		"https://api.<company-name>.com/users/1051/addresses/912",
+		"https://api.<company-name>.com/users/1051/addresses/913",
+		"https://api.<company-name>.com/users/1051/addresses/914"
+	]
+}
+```
 
 * Child objects should by default not be loaded into the parent object to reduce server load, and WAN traffic requirements.  Child objects will be sent as URL references (see above example) allowing the client application to discover and access them as needed.
 * A POST method will return location http header containing the URL to the new resource.  This method is preferred to just returning the ID of the newly created object, and allows the client to optionally call the URL later for GET, PUT, or DELETE methods.
@@ -219,16 +219,18 @@ In the example below, a user is being associated to a userDetail.
 * The API should access data through Repositories.  To support OData, the repositories should return IQueryable and not IEnumerable objects so OData can manipulate the query before it is executed against Entity Framework.
    * For .Net full framework, `Ninject.MVC5` and `WebApiContrib.ioc.Ninject` can be used for dependency injection into the controllers.  Direct Injection is built into .Net Core eliminating the need for Ninject or similar packages.
       * Ninject.CreateKernel:
-         ```cs
-         `GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
-          ```
 
-      * Ninject.RegisterServices:
+```cs
+GlobalConfiguration.Configuration.DependencyResolver = new NinjectResolver(kernel);
+```
 
-         ```cs
-         kernel.Bind<IApiRepository>().To<ApiRepository>();
-         kernel.Bind<ApiContext>().To<ApiContext>();
-         ```
+* Ninject.RegisterServices:
+
+```cs
+kernel.Bind<IApiRepository>().To<ApiRepository>();
+kernel.Bind<ApiContext>().To<ApiContext>();
+```
+
    * The API layer can translate the model from data specific to API specific and back again passing them through the repositories.
 * Do not just use a single DbContext and Repository for the entire database but rather bounded contexts to different areas of data when nesting of related data ($expand) is not needed.  This keeps each context more manageable and the application more scalable.  A single database can still be used, and single tables can be accessible through multiple contexts.  Example: Customer table would be in both the sales and warranty contexts.
    * This is not alweays possible when using OData as its $expand capability can not cross DbContexts, and is a key capability for performant nested data access.

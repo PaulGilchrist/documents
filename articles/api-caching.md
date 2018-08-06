@@ -29,66 +29,66 @@ This document discusses the issues and solutions around caching an API including
  
 ## Code Example
 
-   ```cs
-   [HttpGet]
-   [Route("cacheDemo", Name = "CacheDemo")]
-   public HttpResponseMessage Get() {
-      //Anything added to MemoryCache will be given an AbsoluteExpiration based on the object type.
-      //For this demo we will use 60 seconds but this information should come from another source in production like web.config or SQL to memoryCache
-      int maxAgeSeconds = 60;
-      DateTimeOffset absoluteExpiration;
-      string data = null;
-      // Use the entire URL including querystring as the MemoryCache "key" to determine if the data should be returned from cache or the original source
-      // If nonce=<GUID> is sent in querystring, then "key" will never be found in cache (use this method to bust cache)
-      var key = Request.RequestUri.AbsoluteUri.ToLower();
-      MemoryCache memoryCache = MemoryCache.Default;
-      CacheValue cacheValue = (CacheValue)memoryCache.Get(key);
-      if(cacheValue != null) {
-         data = (string)cacheValue.Data;
-         absoluteExpiration = cacheValue.AbsoluteExpiration;
-         // For demo purposes we are going to change what was in the cache to a new result so the caller can see the cache as source
-         data = "Old data from cache";
-      } else {
-         // Simulate new data coming from the original source
-         data = "New data from original source";
-         absoluteExpiration = DateTimeOffset.UtcNow.AddSeconds(maxAgeSeconds);
-         // Before storing new data into cache, check for nonce querystring parameter
-         if(key.Contains("nonce=")) {
-            // Key should match any original request that would be made without cache busting.
-            key = RemoveQueryStringByKey(key, "nonce");
-            // Remove the old key/value from memory cache if found
-            memoryCache.Remove(key);
-         }
-         memoryCache.Add(key, new CacheValue() { Data = data, AbsoluteExpiration = absoluteExpiration }, absoluteExpiration);
-      }
-      HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, data);
-      response.Headers.CacheControl = new CacheControlHeaderValue() { MaxAge = absoluteExpiration.Subtract(DateTime.Now) };
-      return response;
-   }
-
-   private string RemoveQueryStringByKey(string url, string key) {
-       var uri = new Uri(url);
-      // This gets all the query string key value pairs as a collection
-      var newQueryString = HttpUtility.ParseQueryString(uri.Query);
-      // This removes the key if exists
-      newQueryString.Remove(key);
-      // This gets the page path from root without QueryString
-      string pagePathWithoutQueryString = uri.GetLeftPart(UriPartial.Path);
-      return newQueryString.Count > 0
-         ? String.Format("{0}?{1}", pagePathWithoutQueryString, newQueryString)
-         : pagePathWithoutQueryString;
+```cs
+[HttpGet]
+[Route("cacheDemo", Name = "CacheDemo")]
+public HttpResponseMessage Get() {
+	//Anything added to MemoryCache will be given an AbsoluteExpiration based on the object type.
+	//For this demo we will use 60 seconds but this information should come from another source in production like web.config or SQL to memoryCache
+	int maxAgeSeconds = 60;
+	DateTimeOffset absoluteExpiration;
+	string data = null;
+	// Use the entire URL including querystring as the MemoryCache "key" to determine if the data should be returned from cache or the original source
+	// If nonce=<GUID> is sent in querystring, then "key" will never be found in cache (use this method to bust cache)
+	var key = Request.RequestUri.AbsoluteUri.ToLower();
+	MemoryCache memoryCache = MemoryCache.Default;
+	CacheValue cacheValue = (CacheValue)memoryCache.Get(key);
+	if(cacheValue != null) {
+		data = (string)cacheValue.Data;
+		absoluteExpiration = cacheValue.AbsoluteExpiration;
+		// For demo purposes we are going to change what was in the cache to a new result so the caller can see the cache as source
+		data = "Old data from cache";
+	} else {
+		// Simulate new data coming from the original source
+		data = "New data from original source";
+		absoluteExpiration = DateTimeOffset.UtcNow.AddSeconds(maxAgeSeconds);
+		// Before storing new data into cache, check for nonce querystring parameter
+		if(key.Contains("nonce=")) {
+		// Key should match any original request that would be made without cache busting.
+		key = RemoveQueryStringByKey(key, "nonce");
+		// Remove the old key/value from memory cache if found
+		memoryCache.Remove(key);
+		}
+		memoryCache.Add(key, new CacheValue() { Data = data, AbsoluteExpiration = absoluteExpiration }, absoluteExpiration);
+	}
+	HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK, data);
+	response.Headers.CacheControl = new CacheControlHeaderValue() { MaxAge = absoluteExpiration.Subtract(DateTime.Now) };
+	return response;
 }
 
-   public class CacheValue {
-      public object Data { get; set; }
-      public DateTimeOffset AbsoluteExpiration { get; set; }
-   }
-   ```
+private string RemoveQueryStringByKey(string url, string key) {
+	var uri = new Uri(url);
+	// This gets all the query string key value pairs as a collection
+	var newQueryString = HttpUtility.ParseQueryString(uri.Query);
+	// This removes the key if exists
+	newQueryString.Remove(key);
+	// This gets the page path from root without QueryString
+	string pagePathWithoutQueryString = uri.GetLeftPart(UriPartial.Path);
+	return newQueryString.Count > 0
+		? String.Format("{0}?{1}", pagePathWithoutQueryString, newQueryString)
+		: pagePathWithoutQueryString;
+}
+
+public class CacheValue {
+	public object Data { get; set; }
+	public DateTimeOffset AbsoluteExpiration { get; set; }
+}
+```
 
 ## Default OData Response (non-cached endpoints)
 
-   ```http
-   Cache-Control: no-cache
-   Expires: -1
-   Pragma: no-cache
-   ```
+```http
+Cache-Control: no-cache
+Expires: -1
+Pragma: no-cache
+```

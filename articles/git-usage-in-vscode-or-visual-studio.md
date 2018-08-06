@@ -15,71 +15,71 @@ Many of the below commands can be done from a GUI interface like VS Code, Visual
 1. Create new repository in GitHub or VSTS
 2. Clone new repository onto PC
 
-   ```cmd
-   cd \source
-   git clone https://github.com/PaulGilchrist/<new-repository-name>
-   ```
+```cmd
+cd \source
+git clone https://github.com/PaulGilchrist/<new-repository-name>
+```
 
 3. Copy project files into newly cloned folder
 
 ### Create a new project from existing template project
 
 ```cmd
-   cd \source
-   git clone https://github.com/PaulGilchrist/Angular2Template.git <newProjectName>
-   cd \<newProjectName>
-   rd .git /s /q
-   git init
-   git add .
-   git commit –m “Initial commit”
-   git remote add origin <repo-address>
-   git push -u origin master
-   npm install
-   gulp rebuild
-   npm start
+cd \source
+git clone https://github.com/PaulGilchrist/Angular2Template.git <newProjectName>
+cd \<newProjectName>
+rd .git /s /q
+git init
+git add .
+git commit –m “Initial commit”
+git remote add origin <repo-address>
+git push -u origin master
+npm install
+gulp rebuild
+npm start
 ```
 
 ### Create a new “dev” branch from “master”
 
 ```cmd
-   cd \newProjectName
-   git branch dev
-   git checkout dev
-   git push –u origin dev
-   ```
+cd \newProjectName
+git branch dev
+git checkout dev
+git push –u origin dev
+```
 
 ### Commit changes from “dev”
 
-   ```cmd
-   git add *
-   git commit –m “commit message”
-   git pull
-   git push origin dev
-   ```
+```cmd
+git add *
+git commit –m “commit message”
+git pull
+git push origin dev
+```
 
 ### Merge changes from “dev” back into “master”
 
-   ```cmd
-   git checkout master
-   git pull
-   git merge dev
-   git push origin master
-   ```
+```cmd
+git checkout master
+git pull
+git merge dev
+git push origin master
+```
 
 ### View any merge conflicts
 
-   ```cmd
-   git diff
-   git diff --base <filename>
-   git diff <sourcebranch> <targetbranch>
-   ```
+```cmd
+git diff
+git diff --base <filename>
+git diff <sourcebranch> <targetbranch>
+```
 
 ### Delete “dev” branch
 
-   ```cmd
-   git branch dev –d
-   git push origin :dev
-   ```
+```cmd
+git branch dev –d
+git push origin :dev
+```
 
 [More Info](https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html)
 
