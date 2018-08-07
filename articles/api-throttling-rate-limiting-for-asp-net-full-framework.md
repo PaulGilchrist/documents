@@ -5,7 +5,6 @@ API throttling can easily be added to ASP.Net and ASP.Net Core using existing mi
 ## ASP.NET Full Framework Steps
 
 1. Add NuGet package [WebApiThrottle](https://github.com/stefanprodan/WebApiThrottle)
-   * If using .Net Core use package [AspNetCoreRateLimit](https://github.com/stefanprodan/AspNetCoreRateLimit)
    * If using ASP.NET Core, use the following guide [API - Throttling / Rate Limiting for ASP.NET Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-throttling-rate-limiting-for-asp-net-core.md)
 2. Create new class file names CustomThrottlingHandler
 
