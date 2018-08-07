@@ -21,6 +21,5 @@
 
 ## Needed
 
-
-* API - Enabling Compression on IIS
+* [API - Compression for IIS or NodeJS](https://github.com/PaulGilchrist/documents/blob/master/articles/api-compression-for-iis-or-nodejs)
 * API - Efficiently Leveraging OData Query Capabilities
