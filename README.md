@@ -11,6 +11,7 @@
 * [API - OAuth JWT Bearer Token Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-oauth-jwt-bearer-token-setup-for-asp-net-core.md)
 * [API - OData Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-setup-for-dot-net-core.md)
 * [API - Swagger/Open API for ASP.Net Core using NSWag](https://github.com/PaulGilchrist/documents/blob/master/articles/api-swagger-openapi-for-aspnet-core-using-nswag.md)
+* [API - Throttling / Rate Limiting for ASP.NET Full Framework](https://github.com/PaulGilchrist/documents/blob/master/articles/api-throttling-rate-limiting-for-asp-net-full-framework.md)
 * [Azure - App Registration Setup (including manifest roles, and group to role assignments)](https://github.com/PaulGilchrist/documents/blob/master/articles/azure-app-registration-setup.md)
 
 ## Drafts
@@ -19,6 +20,6 @@
 
 ## Needed
 
-* API - Throttling / Rate Limiting
+* API - Throttling / Rate Limiting for ASP.NET Core
 * API - Enabling Compression on IIS
 * API - Efficiently Leveraging OData Query Capabilities
