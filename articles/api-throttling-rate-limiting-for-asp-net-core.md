@@ -23,6 +23,7 @@ services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"
 services.Configure<IpRateLimitPolicies>(Configuration.GetSection("IpRateLimitPolicies"));
 // inject counter and rules stores
 services.AddSingleton<IClientPolicyStore, MemoryCacheClientPolicyStore>();
+services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
 services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
 ```
 
