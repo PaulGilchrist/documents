@@ -17,6 +17,8 @@ services.AddMemoryCache();
 services.Configure<ClientRateLimitOptions>(Configuration.GetSection("ClientRateLimiting"));
 // load client rules from appsettings.json
 services.Configure<ClientRateLimitPolicies>(Configuration.GetSection("ClientRateLimitPolicies"));
+//load general configuration from appsettings.json
+services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
 //load ip rules from appsettings.json
 services.Configure<IpRateLimitPolicies>(Configuration.GetSection("IpRateLimitPolicies"));
 // inject counter and rules stores
