@@ -8,6 +8,7 @@
 * [Angular - Supporting Multiple Environments (development, QA, staging, production, etc)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-supporting-multiple-environments.md)
 * [Angular - VSTS Build Steps to Leverage Environment Files, and Test Scripts](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-vsts-build-steps.md)
 * [API - Caching](https://github.com/PaulGilchrist/documents/blob/master/articles/api-caching.md)
+* [API - Compression for IIS or NodeJS](https://github.com/PaulGilchrist/documents/blob/master/articles/api-compression-for-iis-or-nodejs.md)
 * [API - OAuth JWT Bearer Token Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-oauth-jwt-bearer-token-setup-for-asp-net-core.md)
 * [API - OData Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-setup-for-dot-net-core.md)
 * [API - Swagger/Open API for ASP.Net Core using NSWag](https://github.com/PaulGilchrist/documents/blob/master/articles/api-swagger-openapi-for-aspnet-core-using-nswag.md)
@@ -21,5 +22,4 @@
 
 ## Needed
 
-* [API - Compression for IIS or NodeJS](https://github.com/PaulGilchrist/documents/blob/master/articles/api-compression-for-iis-or-nodejs)
 * API - Efficiently Leveraging OData Query Capabilities
