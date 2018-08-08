@@ -19,8 +19,10 @@
 
 ## Drafts
 
+* [Angular - Upgrading from Angular 5 to Angular 6](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-upgrading-from-angular-5-to-angular-6.md)
 * [API - REST Design Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/api-rest-design-recommendations.md)
 
 ## Needed
 
 * API - Versioning
+
