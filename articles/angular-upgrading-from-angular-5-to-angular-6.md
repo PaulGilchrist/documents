@@ -1,6 +1,4 @@
-# Upgrading from Angular 5 to Angular 6
-
-## DRAFT
+# Draft Template - Upgrading from Angular 5 to Angular 6
 
 * Discuss change from angular-cli.json to angular.json with internal structure changes
   * `ng update @angular/cli --migrate-only --from=1.7.3`
