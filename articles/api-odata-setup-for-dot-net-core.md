@@ -49,7 +49,7 @@ public class User {
 
 8. Create new controller or change existing controller to extend from `ODataController` rather than `Controller`.  Controller will require a constructor to direct inject the context rather than creating a new context when the controller instance is created.
 9. If security is required on the endpoint, it will be annotated using `[Authorize]` and may also optionally contain one or more required roles (ex: `[Authorize(Roles = "Admin,PowerUser")]`
-10. See document [API - Swagger/Open API for ASP.Net Core using Swashbuckle](https://github.com/PaulGilchrist/documents/blob/master/articles/api-swagger-openapi-for-asp-net-core-using-swashbuckle.md) for proper configuration of OData controller function comments and annotation recomendations
+
 
 Additional OData Best Practices
 * Make sure any repository objects return iQueriable and not iEnumerable objects back to the controller so OData can manipulate the query before it is executed against the database.  This also ensures the joins are occurring on the database server and not within the API.
@@ -71,4 +71,6 @@ public async Task<IActionResult> Get() {
 * As of the time of this writing, the `NSwag` implementation of Swagger/Open API did not recognize controllers that extend from `ODataController`.
 
 ## References
-* [ASP.NET Core OData now Available](https://blogs.msdn.microsoft.com/odatateam/2018/07/03/asp-net-core-odata-now-available/)
+* Microsoft announcement - [ASP.NET Core OData now Available](https://blogs.msdn.microsoft.com/odatateam/2018/07/03/asp-net-core-odata-now-available/)
+* See document [API - Swagger/Open API for ASP.Net Core using Swashbuckle](https://github.com/PaulGilchrist/documents/blob/master/articles/api-swagger-openapi-for-asp-net-core-using-swashbuckle.md) for proper configuration of OData controller function comments and annotation recomendations
+* See [GitHub odate-core-template](https://github.com/PaulGilchrist/odata-core-template) for full source code of a working example of all above steps

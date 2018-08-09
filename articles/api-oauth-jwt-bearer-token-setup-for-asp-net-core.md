@@ -77,3 +77,7 @@ var roles = User.Claims.Where(c => c.Type == ClaimsIdentity.DefaultRoleClaimType
 ```
 
 Similar code can be used to access any of the token's claims.
+
+## References
+
+* See [GitHub odate-core-template](https://github.com/PaulGilchrist/odata-core-template) for full source code of a working example of all above steps

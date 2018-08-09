@@ -246,3 +246,6 @@ kernel.Bind<ApiContext>().To<ApiContext>();
 - [ ] Include more around OData
 - [ ] Async vs Sync when calling across services
 - [ ] Update Behavior section to discuss OData implementation
+
+## References
+* See [GitHub odate-core-template](https://github.com/PaulGilchrist/odata-core-template) for full source code of a working example of the above recomendations

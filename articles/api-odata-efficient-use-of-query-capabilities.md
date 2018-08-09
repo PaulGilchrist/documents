@@ -20,4 +20,7 @@ odata/users?$select=id,firstName,lastName&$filter=status eq ‘active’&$top=10
 
 ## References
 
-* [odata.org]( https://www.odata.org/)
+* OData Specification and detailed documentation - [odata.org]( https://www.odata.org/)
+* See document [API - OData Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-setup-for-dot-net-core.md) for proper implementation of OData
+* See document [API - Swagger/Open API for ASP.Net Core using Swashbuckle](https://github.com/PaulGilchrist/documents/blob/master/articles/api-swagger-openapi-for-asp-net-core-using-swashbuckle.md) for proper configuration of OData controller function comments and annotation recomendations
+* See [GitHub odate-core-template](https://github.com/PaulGilchrist/odata-core-template) for full source code of a working example of all above steps
