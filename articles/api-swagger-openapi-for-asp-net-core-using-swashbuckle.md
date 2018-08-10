@@ -138,7 +138,6 @@ app.UseSwaggerUI(c => {
 8. Make sure each OData controller implements the following class attributes, adjusted appropriatly
 
 ```cs
-[Route("odata/users")]
 [ODataController(typeof(User))]
 ```
 
@@ -147,13 +146,15 @@ app.UseSwaggerUI(c => {
 ```cs
 /// <summary>Query users</summary>
 [HttpGet]
+[Route("odata/users")]
 [ProducesResponseType(typeof(IEnumerable<User>), 200)] // Ok
 [ProducesResponseType(typeof(void), 404)]  // Not Found
 [EnableQuery]
 
 /// <summary>Query users by id</summary>
 /// <param name="id">The user id</param>
-[HttpGet("{id}")]
+[HttpGet]
+[Route("odata/users({id})")]
 [ProducesResponseType(typeof(User), 200)] // Ok
 [ProducesResponseType(typeof(void), 404)] // Not Found
 [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.Select | AllowedQueryOptions.Expand)]
@@ -164,6 +165,7 @@ app.UseSwaggerUI(c => {
 /// </remarks>
 /// <param name="user">A full user object</param>
 [HttpPost]
+[Route("odata/users({id})")]
 [ProducesResponseType(typeof(User), 201)] // Created
 [ProducesResponseType(typeof(ModelStateDictionary), 400)] // Bad Request
 [ProducesResponseType(typeof(void), 401)] // Unauthorized
@@ -174,7 +176,8 @@ app.UseSwaggerUI(c => {
 /// </remarks>
 /// <param name="id">The user id</param>
 /// <param name="userDelta">A partial user object.  Only properties supplied will be updated.</param>
-[HttpPatch("{id}")]
+[HttpPatch]
+[Route("odata/users({id})")]
 [ProducesResponseType(typeof(User), 200)] // Ok
 [ProducesResponseType(typeof(ModelStateDictionary), 400)] // Bad Request
 [ProducesResponseType(typeof(void), 401)] // Unauthorized
@@ -186,7 +189,8 @@ app.UseSwaggerUI(c => {
 /// </remarks>
 /// <param name="id">The user id</param>
 /// <param name="user">A full user object.  Every property will be updated except id.</param>
-[HttpPut("{id}")]
+[HttpPut]
+[Route("odata/users({id})")]
 [ProducesResponseType(typeof(User), 200)] // Ok
 [ProducesResponseType(typeof(ModelStateDictionary), 400)] // Bad Request
 [ProducesResponseType(typeof(void), 401)] // Unauthorized
@@ -197,7 +201,8 @@ app.UseSwaggerUI(c => {
 /// Make sure to secure this action before production release
 /// </remarks>
 /// <param name="id">The user id</param>
-[HttpDelete("{id}")]
+[HttpDelete]
+[Route("odata/users({id})")]
 [ProducesResponseType(typeof(void), 204)] // No Content
 [ProducesResponseType(typeof(void), 401)] // Unauthorized
 [ProducesResponseType(typeof(void), 404)] // Not Found
