@@ -44,10 +44,7 @@ constructor(private adalService: AdalService) {
 
 ```javascript
 import { AdalService } from 'adal-angular4';
-constructor(private adalService: AdalService) {
-	// init requires object with clientId and tenant properties
-	adalService.init(environment.azureAuthProvider);
-}
+constructor(private adalService: AdalService) {}
 ngOnInit(): void {
 	this.adalService.handleWindowCallback();
 }
