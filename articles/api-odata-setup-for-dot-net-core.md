@@ -29,7 +29,8 @@ private static IEdmModel GetEdmModel() {
    builder.Namespace = "ApiTemplate";
    builder.ContainerName = "ApiTemplateContainer";
    builder.EnableLowerCamelCase();
-   builder.EntitySet<User>("Users");
+   builder.EntitySet<Address>("addresses");
+   builder.EntitySet<User>("users");
    return builder.GetEdmModel();
 }
 ```
