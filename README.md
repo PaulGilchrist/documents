@@ -2,7 +2,7 @@
 
 ## Completed
 
-* [GIT - Usage in VSCode or Visual Studio](https://github.com/PaulGilchrist/documents/blob/master/articles/git-usage-in-vscode-or-visual-studio.md)
+* [GIT - Usage in VSCode or Visual Studio](https://github.com/PaulGilchrist/documents/blob/master/articles/git-usage-in-vscode-or-visual-studio/git-usage-in-vscode-or-visual-studio.md)
 * [Angular - Azure SSO Authentication and Authorization](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-azure-sso-authentication-and-authorization.md)
 * [Angular - Module and Folder Structure Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-module-and-folder-structure-recomendations.md)
 * [Angular - Supporting Multiple Environments (development, QA, staging, production, etc)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-supporting-multiple-environments.md)
@@ -24,3 +24,5 @@
 * [API - Versioning](https://github.com/PaulGilchrist/documents/blob/master/articles/api-versioning.md)
 
 ## Needed
+
+* Angular - Adding Bootstrap 4
