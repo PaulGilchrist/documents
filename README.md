@@ -15,6 +15,7 @@
 * [API - OAuth JWT Bearer Token Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-oauth-jwt-bearer-token-setup-for-asp-net-core.md)
 * [API - OData Efficient Use of Query Capabilities](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-efficient-use-of-query-capabilities.md)
 * [API - OData Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-setup-for-dot-net-core.md)
+* [API - REST Design Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/api-rest-design-recommendations.md)
 * [API - Swagger/Open API for ASP.Net Core using Swashbuckle](https://github.com/PaulGilchrist/documents/blob/master/articles/api-swagger-openapi-for-asp-net-core-using-swashbuckle.md)
 * [API - Throttling / Rate Limiting for ASP.NET Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-throttling-rate-limiting-for-asp-net-core.md)
 * [API - Throttling / Rate Limiting for ASP.NET Full Framework](https://github.com/PaulGilchrist/documents/blob/master/articles/api-throttling-rate-limiting-for-asp-net-full-framework.md)
@@ -26,7 +27,7 @@
 ## Drafts
 
 * [Angular - Upgrading from Angular 5 to Angular 6](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-upgrading-from-angular-5-to-angular-6.md)
-* [API - REST Design Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/api-rest-design-recommendations.md)
+
 
 
 ## Needed

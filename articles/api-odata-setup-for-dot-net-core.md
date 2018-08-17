@@ -9,6 +9,7 @@
 .AddJsonOptions(options => {
     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
     options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.CamelCasePropertyNamesContractResolver();
+    options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
 });
 ```
 
