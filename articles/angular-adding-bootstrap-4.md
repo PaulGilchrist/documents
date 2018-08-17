@@ -24,3 +24,13 @@ Bootstrap 4 was developed using SASS, and although it can be deployed to a CSS o
 4. Within file `angular.json`, duplicate the above steps for the test project
 5. Rename styles.css to `styles.scss`
 6. import bootstrap into `styles.scss` by adding the line `@import '~bootstrap/scss/bootstrap.scss';`
+
+## Conversion from Bootstrap 3 to 4
+
+* Project should use SCSS to control variables like colors
+* Replace panels with cards
+* Collapse simplified to `[class.collapse]="!isOpen"` setting this variable in code or by a `(click)` or similar action
+* Replace `hidden-<size>` & `visible-<size>` with combination of `d-<size>-none` and `d-<size>-<displayType>`
+* Replace `pull-right`, `pull-left` with `float-right`, `float-left`
+   * Better to use `d-flex` and `ml-auto` or `mr-auto` to fill middle
+* Use `input-group-prepend` and `append` to get buttons or icons within an input
