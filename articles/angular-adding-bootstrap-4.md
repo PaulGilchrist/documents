@@ -1,6 +1,6 @@
 # Angular - Adding Bootstrap 4
 
-Bootstrap 4 was developed using SASS, and although it can be deployed to a CSS only project, to get the best benefits, the project should be enhanced to support both SASS and CSS using the below steps when adding Bootstrap
+Bootstrap 4 was developed using SASS, and although it can be deployed to a CSS only project, to get the best benefits, including variable override capabilites, the project should be enhanced to support both SASS and CSS using the below steps when adding Bootstrap
 
 1. Edit file `angular.json`, in the `project, schematics` section add the following:
 
@@ -21,6 +21,6 @@ Bootstrap 4 was developed using SASS, and although it can be deployed to a CSS o
 },
 ```
 
-4. Duplicate the above steps for the test project
+4. Within file `angular.json`, duplicate the above steps for the test project
 5. Rename styles.css to `styles.scss`
-6. import bootstrap into `styles.scss` by adding the line `@import '~bootstrap/dist/css/bootstrap.css';`
+6. import bootstrap into `styles.scss` by adding the line `@import '~bootstrap/scss/bootstrap.scss';`
