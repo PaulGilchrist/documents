@@ -61,9 +61,9 @@ This document lists skills both required and useful for the different developer 
 * T-SQL
 * Azure SQL Database
 
-## Useful Skills
+## Additional Useful Skills
 
-### Useful Skills - Common (both front-end & back-end) Developer
+### Useful Skills - Common Developer
 
 * VS Code
   * VS Code is Microsoft's cross OS, light weight, integrated development environment, and an alternative to Visual Studio.  Training should be optional, but many people feel you can be much more productive in VS Code than Visual Studio, so many developers would want to know both.
