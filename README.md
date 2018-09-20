@@ -24,6 +24,7 @@
 * [Azure - App Registration Setup (including manifest roles, and group to role assignments)](https://github.com/PaulGilchrist/documents/blob/master/articles/azure-app-registration-setup.md)
 ---
 * [Training - Priorities](https://github.com/PaulGilchrist/documents/blob/master/articles/training-priorities.md)
+* [Training Topics](https://github.com/PaulGilchrist/documents/blob/master/articles/training-topics.md)
 ---
 
 ## Drafts
