@@ -31,6 +31,6 @@
 
 * [Angular - Upgrading from Angular 5 to Angular 6](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-upgrading-from-angular-5-to-angular-6.md)
 
-
-
 ## Needed
+
+* Additional training topics and details

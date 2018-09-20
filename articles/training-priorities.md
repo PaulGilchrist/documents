@@ -31,7 +31,7 @@ This document lists skills both required and useful for the different developer 
 * TypeScript
 * Node Package Manager (NPM)
 * SASS
-* Jasmine
+* Jasmine/Karma
 * Active Directory Authentication Library (ADAL)
 * WebPack (team leads mostly)
 * Pollyfills
@@ -42,7 +42,7 @@ This document lists skills both required and useful for the different developer 
 * .Net Core 2.1+
 * Entity Framework Core 2.1+
 * REST API
-* Swagger/Open API & Swashbuckle
+* Open API/Swagger & Swashbuckle
 * OData
 * LINQ
 * API Versioning

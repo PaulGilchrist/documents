@@ -2,6 +2,52 @@
 
 Note: A PluralSight account required to access the majority of suggested training materials.  Training materials will be updated as needed to maintain relevancy and currency.
 
+## .Net Core 2.1+
+
+* Description
+* References
+* Training
+  * [Building Your First API with ASP.NET Core](https://app.pluralsight.com/library/courses/asp-dotnet-core-api-building-first/table-of-contents)
+  * [Understanding ASP.NET Core (Update)](https://app.pluralsight.com/library/courses/asp-dot-net-core-understanding/table-of-contents)
+  * [ASP.NET Core Fundamentals](https://app.pluralsight.com/library/courses/aspdotnet-core-fundamentals/table-of-contents)
+  * [Implementing and Securing an API with ASP.NET Core](https://app.pluralsight.com/library/courses/aspdotnetcore-implementing-securing-api/table-of-contents)
+  * [Implementing Custom Middleware Components in ASP.NET Core](https://app.pluralsight.com/library/courses/implementing-custom-middleware-components-aspdotnet-core/table-of-contents)
+  * [Building Your First API with ASP.NET Core](https://app.pluralsight.com/library/courses/asp-dotnet-core-api-building-first/table-of-contents)
+
+## Active Directory Authentication Library (ADAL)
+
+## Angular
+
+* Description
+* References
+* Training
+  * [Angular 2 Fundamentals](https://app.pluralsight.com/library/courses/angular-fundamentals/table-of-contents)
+  * [Angular 2: Getting Started](https://app.pluralsight.com/library/courses/angular-2-getting-started-update/table-of-contents)
+  * [Play by Play: Angular 2 Quick Start with John Papa and Ward Bell](https://app.pluralsight.com/library/courses/play-by-play-angular-2-quick-start-john-papa-ward-bell/table-of-contents)
+  * [Angular 2: First Look](https://app.pluralsight.com/library/courses/angular-2-first-look/table-of-contents)
+  * [Play by Play: Deploying an Angular 2 App to Azure with Git with John Papa and Shayne Boyer](https://app.pluralsight.com/library/courses/play-by-play-angular-2-app-deployment-azure-git-john-papa-shayne-boyer/table-of-contents)
+  * [Angular 2 Forms](https://app.pluralsight.com/library/courses/angular-2-forms/table-of-contents)
+  * [Play by Play: Angular 2/RxJS/HTTP and RESTful Services with John Papa and Dan Wahlin](https://app.pluralsight.com/library/courses/play-by-play-angular-2-rxjs-http-restful-services-john-papa-dan-wahlin/table-of-contents)
+
+## API Versioning
+
+## Azure Application Insights
+
+* Description
+* References
+  * [Application Insights Animated Introduction](https://www.youtube.com/watch?v=fX2NtGrh-Y0)
+  * [Module #1: .NET Core + Application Insights](https://www.youtube.com/watch?v=5j6-FQqE_Fo)
+  * [Introduction to Application Insights](https://www.youtube.com/watch?v=WGqU7ZKCd5Y)
+  * [Monitor Web Apps using Azure Application Insights](https://www.youtube.com/watch?v=WJKefPAdPpg)
+  * [Application Performance Management with Azure Application Insights](https://www.youtube.com/watch?v=K_FVAd4Ipwc)
+* Training
+
+## Azure App Service
+
+## Azure Artifacts (previously in VSTS)
+
+## Azure Boards (previously in VSTS)
+
 ## Azure Data Factory
 
 * Description
@@ -62,6 +108,18 @@ Note: A PluralSight account required to access the majority of suggested trainin
   * [Blob Containers - Set Legal Hold](https://docs.microsoft.com/en-us/rest/api/storagerp/blobcontainers/setlegalhold)
   * [Clear Legal Hold](https://docs.microsoft.com/en-us/rest/api/storagerp/blobcontainers/clearlegalhold)
 
+## Azure PaaS
+
+## Azure Pipelines (previously in VSTS)
+
+## Azure Repos (previously in VSTS)
+
+## Auzre Storage
+
+## Azure SQL Database
+
+## Azure Test Plans (previously in VSTS)
+
 ## Blockchain
 
 * Description
@@ -99,6 +157,16 @@ Note: A PluralSight account required to access the majority of suggested trainin
   * [Bootstrap 4 in 2018 - Free Crash Course of 4.0.0](https://www.youtube.com/watch?v=hnCmSXCZEpU)
   * [Responsive Bootstrap Website Start To Finish with Bootstrap 4, HTML5 & CSS3](https://www.youtube.com/watch?v=9cKsq14Kfsw)
 
+## C\#
+
+## Caching
+
+* Description
+* References
+  * [Why Redis beats Memcached for caching](http://www.infoworld.com/article/3063161/application-development/why-redis-beats-memcached-for-caching.html)
+* Training
+  * [Caching in the .NET Stack: Inside-Out](https://app.pluralsight.com/library/courses/dotnet-caching-inside-out/table-of-contents)
+
 ## Code Scanning Static and Dynamic Active & Passive, OWASP top 10, SANS top 25, and remediation
 
 * Description
@@ -130,6 +198,33 @@ Note: A PluralSight account required to access the majority of suggested trainin
   * [2017-07-26 - Introduction to Docker on Windows with Visual Studio 2017](https://app.pluralsight.com/library/courses/docker-visual-studio-2017-windows/table-of-contents)
   * [2017-03-06 - Implementing Containers on Windows Server 2016](https://app.pluralsight.com/library/courses/windows-server-2016-containers-implementing/table-of-contents)
   * [2016-12-13 - Getting Started with Docker on Windows](https://app.pluralsight.com/library/courses/docker-windows-getting-started/table-of-contents)
+
+## CSS 3
+
+* Description
+* References
+* Training
+  * [Introduction to HTML5 and CSS3](https://app.pluralsight.com/library/courses/introduction-html5-css3/table-of-contents)
+  * [Learn Basic HTML5 and CSS3 by Building Your First Web Page](https://app.pluralsight.com/library/courses/basic-html5-css3-building-first-web-page/table-of-contents)
+  * [Using HTML5 and CSS3](https://app.pluralsight.com/library/courses/html5css3-upgrade/table-of-contents)
+  * [CSS3 In-Depth](https://app.pluralsight.com/library/courses/css3-in-depth/table-of-contents)
+  * [Creating Elegant Navigation Using CSS3 Transitions](https://app.pluralsight.com/library/courses/elegant-navigation-css3-transitions-1975/table-of-contents)
+  * [Learn CSS](https://www.w3schools.com/css/default.asp)
+
+## Dependency Injection
+
+## Entity Framework (Core 2.1+ preferred)
+
+* Description
+* References
+* Training
+  * [Getting Started with Entity Framework 6](https://app.pluralsight.com/library/courses/entity-framework-6-getting-started/table-of-contents)
+  * [Entity Framework Core: Getting Started](https://app.pluralsight.com/library/courses/entity-framework-core-getting-started/table-of-contents)
+  * [Entity Framework in the Enterprise](https://app.pluralsight.com/library/courses/entity-framework-enterprise-update/table-of-contents)
+  * [Entity Framework 6: Ninja Edition - What's New in EF6](https://app.pluralsight.com/library/courses/entity-framework-6-ninja-edition-whats-new/table-of-contents)
+  * [Looking Ahead to Entity Framework 7](https://app.pluralsight.com/library/courses/entity-framework-7-looking-ahead/table-of-contents)
+  * [Entity Framework Database Performance Anti-patterns](https://app.pluralsight.com/library/courses/entity-framework-database-performance-anti-patterns/table-of-contents)
+  * Code-first Entity Framework with Legacy Databases](https://app.pluralsight.com/library/courses/code-first-entity-framework-legacy-databases/table-of-contents)
 
 ## Graph Database
 
@@ -169,6 +264,15 @@ Note: A PluralSight account required to access the majority of suggested trainin
   * [2015-07-20 - Git Branching and Policies in Team Foundation Server 2015](https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2015-Final-Release-Event/Git-Branches-and-Policies-in-Team-Foundation-Server-2015)
   * [2012-05-23 - Git Fundamentals](https://app.pluralsight.com/library/courses/git-fundamentals/table-of-contents)
 
+## HTML 5
+
+* Description
+* References
+* Training
+  * [HTML5 Fundamentals](https://app.pluralsight.com/library/courses/html5-fundamentals/table-of-contents)
+  * [Practical HTML5](https://app.pluralsight.com/library/courses/practical-html5/table-of-contents)
+  * [Learn HTML](https://www.w3schools.com/html/default.asp)
+
 ## HTML Media Capture
 
 * Description
@@ -190,6 +294,43 @@ Note: A PluralSight account required to access the majority of suggested trainin
   * [Practical SQL Server In-Memory OLTP Tables and Objects](https://app.pluralsight.com/library/courses/sql-server-in-memory-oltp-tables-objects/table-of-contents)
   * [In-Memory OLTP](https://app.pluralsight.com/player?course=sql-server-standard-edition-survival-guide&author=russ-thomas&name=sql-server-standard-edition-survival-guide-m4&clip=4&mode=live)
   * [Survey of Initial Areas in In-Memory OLTP](https://docs.microsoft.com/en-us/sql/relational-databases/in-memory-oltp/survey-of-initial-areas-in-in-memory-oltp?view=sql-server-2017)
+
+## Interfaces/Repositories
+
+## Jasmine/Karma
+
+* Description
+* References
+* Training
+  * [Testing JavaScript with Jasmine and TypeScript](https://app.pluralsight.com/library/courses/javascript-jasmine-typescript/table-of-contents)
+
+## JavaScript
+
+* Description
+* References
+* Training
+  * [JavaScript From Scratch](https://app.pluralsight.com/library/courses/javascript-from-scratch/table-of-contents)
+  * [Basics of Programming with JavaScript](https://app.pluralsight.com/library/courses/javascript-programming-basics/table-of-contents)
+  * [Quick Start to JavaScript: Volume 1](https://app.pluralsight.com/library/courses/quick-start-javascript-1-1870/table-of-contents)
+  * [Rapid JavaScript Training](https://app.pluralsight.com/library/courses/rapid-javascript-training/table-of-contents)
+  * [JavaScript: The Good Parts](https://app.pluralsight.com/library/courses/javascript-good-parts/table-of-contents)
+  * [JavaScript Fundamentals for ES6](https://app.pluralsight.com/library/courses/javascript-fundamentals-es6/table-of-contents)
+  * [Advanced JavaScript](https://app.pluralsight.com/library/courses/advanced-javascript/table-of-contents)
+  * [Learn Javascript](https://www.w3schools.com/js/default.asp)
+
+## JSON
+
+* Description
+* References
+* Training
+  * [Learn JSON](https://www.w3schools.com/js/js_json_intro.asp)
+
+## LINQ
+
+* Description
+* References
+* Training
+  * [LINQ Fundamentals with C# 6.0](https://app.pluralsight.com/library/courses/linq-fundamentals-csharp-6/table-of-contents)
 
 ## Microservices
 
@@ -221,6 +362,20 @@ Note: A PluralSight account required to access the majority of suggested trainin
   * [2017-01-30 - Integrating Angular with Node.js RESTful Services](https://app.pluralsight.com/library/courses/angular-nodejs-restful-services/table-of-contents)
   * [2016-09-23 - Code School: Real-time Web with Node.js](https://app.pluralsight.com/library/courses/code-school-real-time-web-with-nodejs/table-of-contents)
   * [2012-12-02 - Introduction to Node.js](https://app.pluralsight.com/library/courses/node-intro/table-of-contents)
+
+## Node Package Manager (NPM)
+
+## OAuth Implicit Flow Bearer Tokens
+
+## OData
+
+## Open API/Swagger & Swashbuckle
+
+## Polyfills
+
+## REST API
+
+## SASS
 
 ## Serverless Computing
 
@@ -263,6 +418,14 @@ Note: A PluralSight account required to access the majority of suggested trainin
 
 ## Temporal Tables
 
+## T-SQL
+
+## TypeScript
+
+## Unit Testing
+
+## Visual Studio 2017
+
 ## VS Code
 
 * Description
@@ -276,6 +439,8 @@ Note: A PluralSight account required to access the majority of suggested trainin
   * [2018-05-15 - Play by Play: Visual Studio Code Can Do That](https://app.pluralsight.com/library/courses/play-by-play-visual-studio-code-can-do-that/table-of-contents)
   * [2017-05-17 - Using Visual Studio Code for ASP.NET Core Projects](https://app.pluralsight.com/library/courses/visual-studio-code-aspdotnet-projects/table-of-contents)
   * [2015-08-28 - Visual Studio Code](https://app.pluralsight.com/library/courses/visual-studio-code/table-of-contents)
+
+## WebPack
 
 ## Web Speech API - Voice to text - PCP recordable and schedule notes and easier creation
 
