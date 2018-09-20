@@ -7,7 +7,7 @@ This document lists skills both required and useful for the different developer 
 
 ## Required Skills
 
-### Required Skills - Common (both front-end & back-end) Developer
+### Required Skills - Common Developer
 
 * Visual Studio 2017+ (or VS Code)
 * JSON
