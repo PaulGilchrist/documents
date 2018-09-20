@@ -369,13 +369,31 @@ Note: A PluralSight account required to access the majority of suggested trainin
 
 ## OData
 
+* Description
+* References
+* Training
+  * [Building ASP.NET Web API OData Services](https://app.pluralsight.com/library/courses/aspnetwebapi-odata/table-of-contents)
+  * [Building a Consistent RESTful API with OData V4 in ASP.NET](https://app.pluralsight.com/library/courses/asp-dot-net-odata-v4-restful-api/table-of-contents)
+
 ## Open API/Swagger & Swashbuckle
 
 ## Polyfills
 
+* Description
+* References
+  * [What is a Polyfill?](https://remysharp.com/2010/10/08/what-is-a-polyfill)
+  * [Polyfill Wikipedia](https://en.wikipedia.org/wiki/Polyfill)
+* Training
+
 ## REST API
 
 ## SASS
+
+* Description
+* References
+* Training
+  * [Simplifying CSS in Visual Studio With Sass](https://app.pluralsight.com/library/courses/simplifying-css-visual-studio-sass/table-of-contents)
+  * [A Better CSS: LESS and SASS](https://app.pluralsight.com/library/courses/better-css/table-of-contents)
 
 ## Serverless Computing
 
@@ -422,7 +440,22 @@ Note: A PluralSight account required to access the majority of suggested trainin
 
 ## TypeScript
 
+* Description
+* References
+* Training
+  * [TypeScript Fundamentals](https://app.pluralsight.com/library/courses/typescript/table-of-contents)
+  * [TypeScript In-depth](https://app.pluralsight.com/library/courses/typescript-in-depth/table-of-contents)
+  * [Advanced TypeScript](https://app.pluralsight.com/library/courses/typescript-advanced/table-of-contents)
+
 ## Unit Testing
+
+* Description
+* References
+* Training
+  * [ASP.NET MVC Testing From Scratch](https://app.pluralsight.com/library/courses/aspdotnet-mvc-testing-from-scratch/table-of-contents)
+  * [End-to-end Software Development with Team Foundation Server 2015](https://app.pluralsight.com/library/courses/tfs-2015/table-of-contents)
+  * [Unit Testing with MSTest - https://app.pluralsight.com/library/courses/mstest/table-of-contents)
+Effective C# Unit Testing for Enterprise Applications](https://app.pluralsight.com/library/courses/csharp-unit-testing-enterprise-applications/description)
 
 ## Visual Studio 2017
 
