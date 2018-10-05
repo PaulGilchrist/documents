@@ -131,6 +131,8 @@ Note: A PluralSight account required to access the majority of suggested trainin
   * [Blob Containers - Set Legal Hold](https://docs.microsoft.com/en-us/rest/api/storagerp/blobcontainers/setlegalhold)
   * [Clear Legal Hold](https://docs.microsoft.com/en-us/rest/api/storagerp/blobcontainers/clearlegalhold)
 
+## Azure Managed Service Identity
+
 ## Azure PaaS
 
 ## Azure Pipelines (previously in VSTS)
@@ -420,7 +422,6 @@ Note: A PluralSight account required to access the majority of suggested trainin
   * [2017-09-28 - Getting Started with ASP.NET Core and OAuth](https://app.pluralsight.com/library/courses/asp-dot-net-core-oauth/table-of-contents)
   * [2017-09-27 - ASP.NET Core Identity Management Playbook](https://app.pluralsight.com/library/courses/aspnet-core-identity-management-playbook/table-of-contents)
 
-
 ## OData
 
 * Description
@@ -436,6 +437,16 @@ Note: A PluralSight account required to access the majority of suggested trainin
 * References
 * Training
   * [2018-09-20 - Swagger/Open API for ASP.Net Core using Swashbuckle](https://github.com/PaulGilchrist/documents/blob/master/articles/api-swagger-openapi-for-asp-net-core-using-swashbuckle.md)
+
+## Polly
+
+* Description
+  * .NET resilience and transient-fault-handling library that allows developers to express policies such as Retry, Circuit Breaker, Timeout, Bulkhead Isolation, and Fallback in a fluent and thread-safe manner.
+* References
+  * [Polly](https://github.com/App-vNext/Polly)
+  * [Adding Resilience and Transient Fault handling to your .NET Core HttpClient with Polly](https://www.hanselman.com/blog/AddingResilienceAndTransientFaultHandlingToYourNETCoreHttpClientWithPolly.aspx)
+  * [Using the Retry pattern to make your cloud application more resilient](https://azure.microsoft.com/en-us/blog/using-the-retry-pattern-to-make-your-cloud-application-more-resilient/)
+  * [Implement HTTP call retries with exponential backoff with HttpClientFactory and Polly policies](https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)
 
 ## Polyfills
 
