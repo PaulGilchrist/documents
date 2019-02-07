@@ -19,6 +19,7 @@
 
 ## API
 
+* [Adding Azure Application Insights](https://github.com/PaulGilchrist/documents/blob/master/articles/api-adding-azure-app-insights.md)
 * [Caching](https://github.com/PaulGilchrist/documents/blob/master/articles/api-caching.md)
 * [Compression for IIS or NodeJS](https://github.com/PaulGilchrist/documents/blob/master/articles/api-compression-for-iis-or-nodejs.md)
 * [OAuth JWT Bearer Token Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-oauth-jwt-bearer-token-setup-for-asp-net-core.md)

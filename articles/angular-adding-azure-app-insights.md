@@ -1,6 +1,6 @@
 # Angular - Adding Azure Application Insights
 
-Azure Application Insights allows for collecting, reporting, and alerting on both server and client side telemetry.  Common client side telemetry includes page views, events, exceptions, and trace data.  The following steps will add the ability for a new or existing Angular application to send Application Insights to Azure:
+Azure Application Insights allows for collecting, reporting, and alerting on both server and client side telemetry.  Common client side telemetry includes page views, events, exceptions, and trace data.  The following steps will add the ability for a new or existing Angular application to send Application Insights telemetry to Azure:
 
 1. In the `package.json` file, add `applicationinsights-js` to the dependencies section and `@types/applicationinsights-js` to the devDependencies section, choosing their latest versions, followed by running `npm install` from the applications root folder to install both packages.
 
