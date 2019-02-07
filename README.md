@@ -6,6 +6,7 @@
 
 ## Angular
 
+* [Adding Azure Application Insights](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-adding-azure-app-insights.md)
 * [Adding Bootstrap 4](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-adding-bootstrap-4.md)
 * [Azure SSO Authentication and Authorization](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-azure-sso-authentication-and-authorization.md)
 * [Module and Folder Structure Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-module-and-folder-structure-recomendations.md)
