@@ -1,4 +1,4 @@
-# API OAuth JWT Bearer Token Setup for ASP.Net Core
+# OAuth JWT Bearer Authentication Setup for ASP.Net Core
 
 ASP.NET 2.0 has great support for consuming and validating OAuth 2.0 tokens, thanks to built-in JWT validation middleware.  With OAuth and stateless applications, the client applications is expected to include a `bearer` token in the HTTP `authorization` header of every request.
 
@@ -49,9 +49,12 @@ To setup OAuth 2.0 JWT token security with ASP.NET 2.0 and above, follow the bel
 },
 ```
 
+   * Notice that multiple `AllowedAudiences` are supported when separating them by a `","`
+
 2. In file `Startup.cs` function `ConfigureServices` add the following code:
 
 ```cs
+// Configure OAuth Authentication
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
    .AddJwtBearer(options => {
       options.Authority = "https://login.microsoftonline.com/" + Configuration.GetValue<string>("Security:TenantIdentifier");
@@ -61,7 +64,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
    });
 ```
 
-3. In file `Startup.cs` function `Configure` just above `app.UseMvc` add the following code:
+3. In file `Startup.cs` function `Configure` just above `app.UseMvc` add the following code (if not already existing):
 
 ```cs
 app.UseAuthentication();

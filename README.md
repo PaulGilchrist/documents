@@ -20,9 +20,10 @@
 ## API
 
 * [Adding Azure Application Insights](https://github.com/PaulGilchrist/documents/blob/master/articles/api-adding-azure-app-insights.md)
+* [Basic Authentication for ASP.NET Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-basic-authentication-setup-for-asp-net-core.md)
 * [Caching](https://github.com/PaulGilchrist/documents/blob/master/articles/api-caching.md)
 * [Compression for IIS or NodeJS](https://github.com/PaulGilchrist/documents/blob/master/articles/api-compression-for-iis-or-nodejs.md)
-* [OAuth JWT Bearer Token Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-oauth-jwt-bearer-token-setup-for-asp-net-core.md)
+* [OAuth JWT Bearer Authentication Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-oauth-jwt-bearer-authentication-setup-for-asp-net-core.md)
 * [OData Efficient Use of Query Capabilities](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-efficient-use-of-query-capabilities.md)
 * [OData Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-setup-for-dot-net-core.md)
 * [OData Versioning Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/api-odata-versioning-setup-for-asp-net-core.md)
