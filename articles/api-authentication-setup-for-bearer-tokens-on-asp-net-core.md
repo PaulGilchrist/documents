@@ -1,4 +1,4 @@
-# OAuth JWT Bearer Authentication Setup for ASP.Net Core
+# Authentication Setup for Bearer Tokens on ASP.Net Core
 
 ASP.NET 2.0 has great support for consuming and validating OAuth 2.0 tokens, thanks to built-in JWT validation middleware.  With OAuth and stateless applications, the client applications is expected to include a `bearer` token in the HTTP `authorization` header of every request.
 

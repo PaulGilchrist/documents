@@ -1,4 +1,4 @@
-# Basic Authentication Setup for ASP.Net Core
+# Authentication Setup for Basic Tokens on ASP.Net Core
 
 ASP.NET 2.x has great support for consuming and validating the HTTP `Authorization` header.  This document will discuss adding support for `Basic` authentication.  Basic authentication is frequently used as API keys to allow API to API communication, where `OAuth` would be more appropriate for User/Browser to server communication to best ensure the ability to protect the key.  In every case, `Basic` authentication should only be passed across an encrypted connection.
 
