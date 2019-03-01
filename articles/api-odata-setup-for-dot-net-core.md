@@ -20,7 +20,7 @@ services.AddOData();
 ```cs
 routes => {
 routes.Count().Filter().OrderBy().Expand().Select().MaxTop(null);
-routes.MapVersionedODataRoutes("ODataRoute", "odata", modelBuilder.GetEdmModel());
+routes.MapODataServiceRoute("ODataRoute", "odata", modelBuilder.GetEdmModel());
 routes.EnableDependencyInjection();
 ```
 
@@ -97,7 +97,7 @@ public async Task<IActionResult> Get() {
 
 ## Notes
 
-* As of the time of this writing, Swashbuckle/Swagger/Open API did not recognize controllers that extend from `ODataController`, without also adding `Microsoft.AspCore.OData.Versioning.ApiExplorer`, as Swashbuckle used ApiExplorer for reflection to discover each controler and its actions.  There is a second document discussing how to add Open API/Swagger which discusses this in more detail.
+* As of the time of this writing, Swashbuckle/Swagger/Open API did not recognize controllers that extend from `ODataController`, without also adding `Microsoft.AspCore.OData.Versioning.ApiExplorer`, as Swashbuckle used ApiExplorer for reflection to discover each controler and its actions.  There are separate documents discussing the steps for adding versioning to OData and Open API/Swagger.
 
 ## References
 
