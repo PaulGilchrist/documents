@@ -48,7 +48,6 @@
 >
 >## Needed
 >
-> * Adding API Key support to ASP.Net Core
 > * OData Bulk Updates
 > * API Security - Column and Row Level
 > * Entity Framework Code First in ASP.Net Core
