@@ -117,7 +117,7 @@ namespace API.Classes {
 app.UseAuthentication();
 ```
 
-7. Applications should always be using encryption, but this becomes critically important when receiving Basic authentication tokens.  To ensure encryption is always used, add the following line in file `Startup.cs` function `Configure` just above `app.UseAuthentication()` if it does not already exist:
+8. Applications should always be using encryption, but this becomes critically important when receiving Basic authentication tokens.  To ensure encryption is always used, add the following line in file `Startup.cs` function `Configure` just above `app.UseAuthentication()` if it does not already exist:
 
 ```cs
 app.UseHttpsRedirection();
