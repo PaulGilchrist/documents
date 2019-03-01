@@ -13,7 +13,7 @@ To setup Basic authenticatiuon with ASP.NET Core 2.0 and above, follow the below
    * There are many tools for Base64 encoding and decoding, but one recomendation is [https://www.base64encode.org](https://www.base64encode.org/)
    * Another method is the following powershell script:
 
-```ps
+```powershell
 $Credential = Get-Credential
 $EncodedUsernamePassword = [System.Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes($('{0}:{1}' -f $Credential.UserName, $Credential.GetNetworkCredential().Password)))
 Write-Output "<!--$EncodedUsernamePassword $($Credential.UserName):$($Credential.GetNetworkCredential().Password)-->"
