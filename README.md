@@ -47,4 +47,9 @@
 >
 >## Needed
 >
->* Additional training topics and details
+> * Adding API Key support to ASP.Net Core
+> * OData Bulk Updates
+> * API Security - Column and Row Level
+> * Entity Framework Code First in ASP.Net Core
+> * OData Routing to non-unique object names (ex: Tags, Notes, Documents, etc.)
+> * API Event Grid Integration

@@ -1,6 +1,8 @@
 # API - Swagger/Open API for ASP.Net Core using Swashbuckle
 
-As of the time of this writing (8/9/2018), Swashbuckle and OData both fully support ASP.Net Core 2.x and above, but they do not fully support one another.  This document will not only cover a standard installation of Swashbuckle on ASP.Net Core, but all steps needed to ensure it works well with OData
+As of the time of this writing (3/1/2019), Swashbuckle and OData both fully support ASP.Net Core 2.x and above, but they do not fully support one another.  If adding Swashbuckle to an existing OData API, please first follow the document titled [OData Versioning Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/api-odata-versioning-setup-for-asp-net-core.md).
+
+This document will not only cover a standard installation of Swashbuckle on ASP.Net Core, but all steps needed to ensure it works well with OData
 
 ## Swashbuckle Implementation Steps
 
@@ -15,133 +17,141 @@ As of the time of this writing (8/9/2018), Swashbuckle and OData both fully supp
 
 ```cs
 Swashbuckle.AspNetCore
-Swashbuckle.AspNetCore.Filters
+Swashbuckle.AspNetCore.Annotations
 ```
 
-3. If supporting OData, make sure the following code is placed in file `Startup.cs` and function `ConfigureServices`, just under the line `services.AddOData();` and above the line `services.AddMvc()`.
+3. In the `Classes` folder (create if needed), add a new class named `ConfigureSwaggerOptions` with the following code (adjusting descriptive content as needed):
 
 ```cs
-// Workaround to support OData and Swashbuckle working together: https://github.com/OData/WebApi/issues/1177
-services.AddMvcCore(options => {
-   foreach (var outputFormatter in options.OutputFormatters.OfType<ODataOutputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0)) {
-      outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
-   }
-   foreach (var inputFormatter in options.InputFormatters.OfType<ODataInputFormatter>().Where(_ => _.SupportedMediaTypes.Count == 0)) {
-      inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
-   }
-}).AddApiExplorer();
-```
+    using Microsoft.AspNetCore.Mvc.ApiExplorer;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Options;
+    using Swashbuckle.AspNetCore.Swagger;
+    using Swashbuckle.AspNetCore.SwaggerGen;
 
-4. If supporting OData, add a file named `ODataControllerAttribute.cs` to the classes folder, and paste in the following code:
+    /// <summary>
+    /// Configures the Swagger generation options.
+    /// </summary>
+    /// <remarks>This allows API versioning to define a Swagger document per API version after the
+    /// <see cref="IApiVersionDescriptionProvider"/> service has been resolved from the service container.</remarks>
+    public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions> {
+        readonly IApiVersionDescriptionProvider provider;
 
-```cs
-using System;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ConfigureSwaggerOptions"/> class.
+        /// </summary>
+        /// <param name="provider">The <see cref="IApiVersionDescriptionProvider">provider</see> used to generate Swagger documents.</param>
+        public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider) => this.provider = provider;
 
-namespace OdataCoreTemplate.Classes {
-    [AttributeUsage(AttributeTargets.Class)]
-    public class ODataControllerAttribute : Attribute {
-        // Place this attribute on an OData controller to allow Swagger to document its endpoints
-        public Type EntityType { get; set; }
+        /// <inheritdoc />
+        public void Configure(SwaggerGenOptions options) {
+            // add a swagger document for each discovered API version
+            // note: you might choose to skip or document deprecated API versions differently
+            foreach (var description in provider.ApiVersionDescriptions) {
+                options.SwaggerDoc(description.GroupName, CreateInfoForApiVersion(description));
+            }
+        }
 
-        public ODataControllerAttribute(Type entityType) {
-            this.EntityType = entityType;
+        static Info CreateInfoForApiVersion(ApiVersionDescription description) {
+            var info = new Info() {
+                Title = "OData, Open API, .Net Core demo and training API",
+                Version = description.ApiVersion.ToString(),
+                Description = "OData, Open API, .Net Core demo and training API",
+                Contact = new Contact() { Name = "Paul Gilchrist", Email = "paul.gilchrist@outlook.com" },
+                TermsOfService = "Shareware",
+                License = new License() { Name = "MIT", Url = "https://opensource.org/licenses/MIT" }
+            };
+            if (description.IsDeprecated) {
+                info.Description += " This API version has been deprecated.";
+            }
+            return info;
         }
     }
-}
 ```
 
-5.	If supporting OData, add a file named ` SwaggerODataOperationFilter.cs` to the classes folder, and paste in the following code:
+4. In the `Classes` folder, add a new class named `SwaggerDefaultValues` with the following code (adjusting descriptive content as needed):
 
 ```cs
-using Microsoft.AspNet.OData;
-using Microsoft.AspNet.OData.Query;
-using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using System;
-using System.Linq;
+    using Swashbuckle.AspNetCore.Swagger;
+    using Swashbuckle.AspNetCore.SwaggerGen;
+    using System.Linq;
 
-namespace OdataCoreTemplate.Classes {
-    public class SwaggerODataOperationFilter : IOperationFilter {
+    /// <summary>
+    /// Represents the Swagger/Swashbuckle operation filter used to document the implicit API version parameter.
+    /// </summary>
+    /// <remarks>This <see cref="IOperationFilter"/> is only required due to bugs in the <see cref="SwaggerGenerator"/>.
+    /// Once they are fixed and published, this class can be removed.</remarks>
+    public class SwaggerDefaultValues : IOperationFilter {
+        /// <summary>
+        /// Applies the filter to the specified operation using the given context.
+        /// </summary>
+        /// <param name="operation">The operation to apply the filter to.</param>
+        /// <param name="context">The current operation filter context.</param>
         public void Apply(Operation operation, OperationFilterContext context) {
-            // Add the standard OData parameters allowed for an controllers when the controller has the [ODataController] attribute and the function has the [EnableQuery] attribute
-            var odataControllerAttribute = context.MethodInfo.DeclaringType.GetCustomAttributes(true)
-                // .Union(context.MethodInfo.GetCustomAttributes(true))
-                .OfType<ODataControllerAttribute>()
-                .FirstOrDefault(a => a is ODataControllerAttribute);
-            if (odataControllerAttribute != null) {
-                if (context.ApiDescription.HttpMethod.Equals("GET", StringComparison.OrdinalIgnoreCase)) {
-                    var enableQueryAttribute = context.MethodInfo.GetCustomAttributes(true)
-                            .OfType<EnableQueryAttribute>()
-                            .FirstOrDefault(a => a is EnableQueryAttribute);
-                    if (enableQueryAttribute != null) {
-                        if (enableQueryAttribute.AllowedQueryOptions.HasFlag(AllowedQueryOptions.Top))
-                            operation.Parameters.Add(new NonBodyParameter() { Name = "$top", Description = "Limits the number of items to be returned", Required = false, Type = "integer", In = "query" });
-                        if (enableQueryAttribute.AllowedQueryOptions.HasFlag(AllowedQueryOptions.Skip))
-                            operation.Parameters.Add(new NonBodyParameter() { Name = "$skip", Description = "Skips the first /n/ items of the queried collection from the result", Required = false, Type = "integer", In = "query" });
-                        if (enableQueryAttribute.AllowedQueryOptions.HasFlag(AllowedQueryOptions.Filter))
-                            operation.Parameters.Add(new NonBodyParameter() { Name = "$filter", Description = "Restricts the set of items returned", Required = false, Type = "string", In = "query" });
-                        if (enableQueryAttribute.AllowedQueryOptions.HasFlag(AllowedQueryOptions.Select))
-                            operation.Parameters.Add(new NonBodyParameter() { Name = "$select", Description = "Restricts the properties returned", Required = false, Type = "string", In = "query" });
-                        if (enableQueryAttribute.AllowedQueryOptions.HasFlag(AllowedQueryOptions.OrderBy))
-                            operation.Parameters.Add(new NonBodyParameter() { Name = "$orderby", Description = "Sorts the returned items by these properties (asc or desc)", Required = false, Type = "string", In = "query" });
-                        if (enableQueryAttribute.AllowedQueryOptions.HasFlag(AllowedQueryOptions.Expand))
-                            operation.Parameters.Add(new NonBodyParameter() { Name = "$expand", Description = "Expands navigation properties", Required = false, Type = "string", In = "query" });
-                        if (enableQueryAttribute.AllowedQueryOptions.HasFlag(AllowedQueryOptions.Count))
-                            operation.Parameters.Add(new NonBodyParameter() { Name = "$count", Description = "Retrieves the total count of items as an attribute in the results.", Required = false, Type = "boolean", In = "query" });
-                    }
+            var apiDescription = context.ApiDescription;
+            //operation.Deprecated = apiDescription.IsDeprecated();
+            if (operation.Parameters == null) {
+                return;
+            }
+            // REF: https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/412
+            // REF: https://github.com/domaindrivendev/Swashbuckle.AspNetCore/pull/413
+            foreach (var parameter in operation.Parameters.OfType<NonBodyParameter>()) {
+                var description = apiDescription.ParameterDescriptions.First(p => p.Name == parameter.Name);
+                if (parameter.Description == null) {
+                    parameter.Description = description.ModelMetadata?.Description;
                 }
+                if (parameter.Default == null) {
+                    parameter.Default = description.DefaultValue;
+                }
+                parameter.Required |= description.IsRequired;
             }
         }
     }
+```
+
+5. In file `Startup.cs` add a new function to the `Startup` classas follows:
+
+```cs
+static string XmlCommentsFilePath {
+    get {
+        var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+        var fileName = typeof(Startup).GetTypeInfo().Assembly.GetName().Name + ".xml";
+        return Path.Combine(basePath, fileName);
+    }
 }
 ```
 
-4. In file `Startup.cs` and function `ConfigureServices`, add the following code just under the line `services.AddMvc();`:
+6. In file `Startup.cs` and function `ConfigureServices`, just under the section `services.AddODataApiExplorer();`, place the following code:
 
 ```cs
+services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 // Register the Swagger generator, defining 1 or more Swagger documents
-services.AddSwaggerGen(c => {
-   c.SwaggerDoc("v1", new Info {
-      Title = "OData Core Template",
-      Description = "A simple example ASP.NET Core Web API leveraging OData, OAuth, and Swagger/Open API",
-      Version = "v1"
-   });
-   // Set the comments path for the Swagger JSON and UI.
-   var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-   var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-   c.IncludeXmlComments(xmlPath);
+services.AddSwaggerGen(options => {
+    // add a custom operation filter which sets default values
+    options.OperationFilter<SwaggerDefaultValues>();
+    options.CustomSchemaIds((x) => x.Name + "_" + Guid.NewGuid());
+    // integrate xml comments
+    options.IncludeXmlComments(XmlCommentsFilePath);
 });
 ```
 
-5. If supporting OData, in file `Startup.cs`, function `Configure`, add sub-function `services.AddSwaggerGen`, add the following code:
-
-```cs
-// Workaround to show OData input parameters in Swashbuckle (waiting on Swashbuckle.AspNetCore.Odata NuGet package)
-c.OperationFilter<SwaggerODataOperationFilter>();
-```
-
-6. In file `Startup.cs` and function `Configure`, add the following code above the line `app.UseMvc`:
+7. In file `Startup.cs` and function `Configure()`, just under the section `services.UseMvc();`, place the following code:
 
 ```cs
 // Enable middleware to serve generated Swagger as a JSON endpoint.
 app.UseSwagger();
-// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
-// specifying the Swagger JSON endpoint.
-app.UseSwaggerUI(c => {
-   c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-   c.DocExpansion(DocExpansion.None);
+// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+app.UseSwaggerUI(options => {
+    foreach (var description in provider.ApiVersionDescriptions) {
+        options.SwaggerEndpoint(
+            $"/swagger/{description.GroupName}/swagger.json",
+            description.GroupName.ToUpperInvariant());
+    }
+    options.DocExpansion(DocExpansion.None);
 });
 ```
 
-7. Make sure each OData controller is extended from `Controller` and not `ODataController`
-
-8. Make sure each OData controller implements the following class attributes, adjusted appropriatly
-
-```cs
-[ODataController(typeof(User))]
-```
-
-9. Ensure each OData controller HTTP action function implements the following comments and attributes appropriate for the given action.  Below are example of the most common comments and attributes used for each action type.
+9. Ensure each OData controller HTTP action function implements the following comments and attributes appropriate for the given action.  Below are examples of the most common comments and attributes used for each action type.
 
 ```cs
 /// <summary>Query users</summary>
@@ -211,4 +221,6 @@ app.UseSwaggerUI(c => {
 ## References
 
 * See document [API - OData Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-setup-for-dot-net-core.md) for proper implementation of OData
+* See document [OData Versioning Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/api-odata-versioning-setup-for-asp-net-core.md) for proper implementation of OData Versioning
+
 * See [GitHub odate-core-template](https://github.com/PaulGilchrist/odata-core-template) for full source code of a working example of all above steps

@@ -76,6 +76,8 @@ public class User {
 
 8. Create new controller or change existing controller to extend from `ODataController` rather than `Controller`.  Controller will require a constructor to direct inject the context rather than creating a new context when the controller instance is created.
 9. If security is required on the endpoint, it will be annotated using `[Authorize]` and may also optionally contain one or more required roles (ex: `[Authorize(Roles = "Admin,PowerUser")]`
+10. Optionally add an `[ODataRoutePrefix("")]` attribute to controllers to support attribute based routing.  This is not required if each actions has a full route rather that just a route below the prefix.  Make sure to fill in the route name to match the OData EntityType name (ex:`[ODataRoutePrefix("users")]`)
+11. Add [ODataRoute("")] Attribute to each controller action, along with the full path to the action, or a path from the class's `[ODataRoutePrefix("")]` if exists.  Make sure to fill in the route name to match the OData EntityType name (ex:`[ODataRoute("users")]`) if a prefix was not supplied.
 
 
 ## Additional OData Best Practices
