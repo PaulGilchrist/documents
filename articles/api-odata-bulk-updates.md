@@ -98,7 +98,7 @@ This approach work for both POST and PATCH actions but presents an issue for Swa
 options.CustomSchemaIds((x) => x.Name + "_" + Guid.NewGuid());
 ```
 
-We now have both OData and Swashbuckle/Swagger working properly for both POST and PUT actions, but there is still an issue when doiung a PATCH action due to OData's `Delta<T>` requirements.  A `Delta<T>` cannot be defined within another object, and also does not support partial object below the root level object.  Both of these issues can be solved by using a dynamic object instead.  The first step is creating a new class in the `Models` folder as follows:
+We now have both OData and Swashbuckle/Swagger working properly for both POST and PUT actions, but there is still an issue when doiung a PATCH action due to OData's `Delta<T>` requirements.  A `Delta<T>` cannot be defined within another object, and also does not support a partial object below the root level object.  Both of these issues can be solved by using a dynamic object instead.  The first step is creating a new class in the `Models` folder as follows:
 
 ```cs
 using System.Collections.Generic;
@@ -151,9 +151,7 @@ to this bulk PATCH implementation:
 /// <remarks>
 /// Make sure to secure this action before production release
 /// </remarks>
-/// <param name="userList">An object containing an array of partial user objects.
-/// See GET action for object model.  Since PATCH only requires the id property and those properties being modified, it does not have its own model
-/// </param>
+/// <param name="userList">An object containing an array of partial user objects.  Only properties supplied will be updated.</param>
 [HttpPatch]
 [ODataRoute("")]
 [ProducesResponseType(typeof(IEnumerable<User>), 200)] // Ok
@@ -161,8 +159,13 @@ to this bulk PATCH implementation:
 [ProducesResponseType(typeof(void), 401)] // Unauthorized
 [ProducesResponseType(typeof(void), 404)] // Not Found
 //[Authorize]
-public async Task<IActionResult> Patch([FromBody] DynamicList userList) {
-    var patchUsers = userList.value;
+public async Task<IActionResult> Patch([FromBody] UserList userList) {
+    // Swagger will report a UserList object model, but what is actually being passed in is a dynamic list since PATCH does not require the full object properties
+    //     This mean we actually need a DynamicList, so reposition and re-read the body
+    //     Full explaination ... https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-bulk-updates.md
+    Request.Body.Position = 0;
+    var patchUserList = JsonConvert.DeserializeObject<DynamicList>(new StreamReader(Request.Body).ReadToEnd());
+    var patchUsers = patchUserList.value;
     List<User> dbUsers = new List<User>(0);
     System.Reflection.PropertyInfo[] userProperties = typeof(User).GetProperties();
     foreach (JObject patchUser in patchUsers) {
@@ -176,6 +179,7 @@ public async Task<IActionResult> Patch([FromBody] DynamicList userList) {
             foreach (var userProperty in userProperties) {
                 if (String.Compare(patchUserProperty.Name, userProperty.Name, true) == 0) {
                     _db.Entry(dbUser).Property(userProperty.Name).CurrentValue = Convert.ChangeType(patchUserProperty.Value, userProperty.PropertyType);
+                    // Could optionally even support delta's within delta's here
                 }
             }
         }
@@ -188,7 +192,7 @@ public async Task<IActionResult> Patch([FromBody] DynamicList userList) {
 }
 ```
 
-The downside to this approach is that the Open API/Swagger will not show the object model details due to the dynamic object type, so the Swagger definition was updated to inform the caller to use the same format documented for the other HTTP actions.  In the futute, hopefully the `Delta<T>` object will allow for existing within an array rather than only as the root object.
+With the above code, Open API/Swagger will document a `UserList` object model, but what is actually being passed in is a `DynamicList` since `PATCH` only passes in the properties that have changed.  If we were to use the `UserList` instead of `DynamicList`, properties not passed in would show as null or zero, and it would be impossible to tell what parameters require updating.  For this reason, we need to re-position and re-read the request body into a `DynamicList` object, pull out the user array, looping through it, updating only those properties passed in.  This extends OData’s `Delta<T>` object not only in the support of bulk updates, but also in the optional ability to patch nested complex objects.
 
 An example of how to call a bulk PATCH operation is as follows:
 
@@ -207,4 +211,4 @@ An example of how to call a bulk PATCH operation is as follows:
 }
 ```
 
-As with POST and PUT, the array of object is contained within the root object's `value` property, and only the `id`, is required, where all the remaining properties are optional and should only be passed in if they have changed.
+As with POST and PUT, the array of objects is contained within the root object's `value` property, with only the `id` required.  All the remaining properties are optional and should only be passed in if they have changed.
