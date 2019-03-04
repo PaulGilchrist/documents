@@ -205,7 +205,7 @@ An example of how to call a bulk PATCH operation is as follows:
     },
     {
       "id": 2,
-      "firstName": "John2"
+      "firstName": "Paul2"
     }
   ]
 }
