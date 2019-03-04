@@ -189,3 +189,22 @@ public async Task<IActionResult> Patch([FromBody] DynamicList userList) {
 ```
 
 The downside to this approach is that the Open API/Swagger will not show the object model details due to the dynamic object type, so the Swagger definition was updated to inform the caller to use the same format documented for the other HTTP actions.  In the futute, hopefully the `Delta<T>` object will allow for existing within an array rather than only as the root object.
+
+An example of how to call a bulk PATCH operation is as follows:
+
+```json
+{
+  "value": [
+    {
+      "id": 1,
+      "lastName": "Gilchrist2"
+    },
+    {
+      "id": 2,
+      "firstName": "John2"
+    }
+  ]
+}
+```
+
+As with POST and PUT, the array of object is contained within the root object's `value` property, and only the `id`, is required, where all the remaining properties are optional and should only be passed in if they have changed.
