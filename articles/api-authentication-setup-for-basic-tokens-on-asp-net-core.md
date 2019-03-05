@@ -80,9 +80,9 @@ namespace API.Classes {
                     try {
                         var credentialBytes = Convert.FromBase64String(token);
                         var credentials = Encoding.UTF8.GetString(credentialBytes).Split(':');
-                        var username = credentials[0];
+                        var name = credentials[0];
                         var claims = new[] {
-                            new Claim(ClaimTypes.Name, username)
+                            new Claim(ClaimTypes.Name, name)
                         };
                         var identity = new ClaimsIdentity(claims, Scheme.Name);
                         var principal = new ClaimsPrincipal(identity);
@@ -122,3 +122,111 @@ app.UseAuthentication();
 ```cs
 app.UseHttpsRedirection();
 ```
+
+9. Test by adding an `[Authorize]` attribute to any controller action, and then using a tool like `Postman` to call that API, making sure to add and `Authorization` header to the HTTP request with the value of `Basic dGVzdGluZzpwYXNzd29yZA==`, or any other API key added to `appsettings.json`.
+
+## Advanced Setup - Adding Role Based, Real Time Updatable Authorization
+
+In this section, we will discuss how to add role based authorization to `Basic` authentication.  These roles will be added to the identity in the same manner used by `OAuth` tokens allowing the application to support both authorization methods simultaniously.  We will also discuss how these roles can be cached in memory for best performance, and persisted in SQL for more real time administration of application access rights.
+
+1. In the `Models` folder, create a new class named `ClaimRoles` with using the following code:
+
+```cs
+using System.ComponentModel.DataAnnotations;
+
+namespace ODataCoreTemplate.Models {
+    public class ClaimRoles {
+        [Key]
+        [Required]
+        [Display(Name = "Name")]
+        [StringLength(50)]
+        public string Name { get; set; }
+        [Display(Name = "Roles")] //Comma delimited string containing 0 or more roles
+        [Required]
+        [StringLength(50)]
+        public string Roles { get; set; }
+    }
+}
+```
+
+2. In the `ApiDbContext` class, add a new `DbSet` for the newly created ClaimRoles model:
+
+```cs
+public DbSet<ClaimRoles> ClaimRoles { get; set; }
+```
+
+3. In the `ApiDbContext` class, and `OnModelCreating` function, add a new `Entity` for the newly created ClaimRoles model:
+
+```cs
+modelBuilder.Entity<ClaimRoles>();
+```
+
+4. If using the `MockData` class, add the following code to the bottom of the `AddMockData()` but above `SaveChanges()`.  This is to create at least one account for authentication and authroization testing, and works with the Basic authentication key added to `appsettings.json` earlier in the document.
+
+```cs
+// Add a role to the testing user
+context.ClaimRoles.Add(new ClaimRoles { Name = "testing", Roles = "Admin,PowerUser" });
+```
+
+5. In the `Classes` folder, create a new class named `Securty` using the following code:
+
+```cs
+using Microsoft.Extensions.Caching.Memory;
+using OdataCoreTemplate.Models;
+using System;
+using System.Threading.Tasks;
+
+namespace API.Classes {
+    public class Security {
+        private IMemoryCache _cache;
+        private OdataCoreTemplate.Models.ApiDbContext _db;
+
+        public Security(ApiDbContext context, IMemoryCache memoryCache) {
+            _cache = memoryCache;
+            _db = context;
+        }
+
+        public async Task<string[]> GetRoles(string name) {
+            // Returns a comma separated list of claim roles as a string
+            // First try and get roles from memory cache
+            string[] roles = null;
+            if (!_cache.TryGetValue("roles-" + name, out roles)) {
+                // try and get roles from database
+                var claimRoles = await _db.ClaimRoles.FindAsync(name);
+                if(claimRoles != null) {
+                    roles = claimRoles.Roles.Split(",");
+                }
+                // Add roles to the cache even if they were not found in the database (roles=null)
+                MemoryCacheEntryOptions memoryCacheEntryOptions = new MemoryCacheEntryOptions();
+                memoryCacheEntryOptions.SetSlidingExpiration(new TimeSpan(4, 0, 0));
+                _cache.Set("roles-" + name, roles, memoryCacheEntryOptions);
+            }
+            return roles;
+        }
+    }
+}
+```
+
+6. In the `Startus.cs` file, `ConfigureServices()` function just below `AddDbContext`, add the following lines of code adding support for in memory caching and the newly created `Security` class:
+
+```cs
+services.AddMemoryCache();
+services.AddSingleton<Security>();
+```
+
+7. Modify the `BasicAuthenticationHandler` class to direct inject the constructor of the newly created `Security` class, saving it to a private property named `_security`.
+8. Modify the function named `HandleAuthenticateAsync()`, adding the follwing code after `identity` is set and before `principal` is set.
+
+```cs
+var roles = await _security.GetRoles(name);
+if (roles == null) {
+    // Null means the identity was not found
+    return AuthenticateResult.Fail("Forbidden");
+}
+// Blank string means the identity was found but has no special roles
+foreach (var role in roles) {
+    identity.AddClaim(new Claim("http://schemas.microsoft.com/ws/2008/06/identity/claims/role", role));
+}
+```
+
+9. Test by adding an `[Authorize(Role="Admin")]` attribute to any controller action, and then using a tool like `Postman` to call that API, making sure to add an `Authorization` header to the HTTP request with the value of `Basic dGVzdGluZzpwYXNzd29yZA==`, or any other API key added to both `appsettings.json` with roles in the SQL database.
