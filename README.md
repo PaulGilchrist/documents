@@ -24,6 +24,7 @@
 * [Authentication Setup for Bearer Tokens on ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-authentication-setup-for-bearer-tokens-on-asp-net-core.md)
 * [Caching](https://github.com/PaulGilchrist/documents/blob/master/articles/api-caching.md)
 * [Compression for IIS or NodeJS](https://github.com/PaulGilchrist/documents/blob/master/articles/api-compression-for-iis-or-nodejs.md)
+* [Enum Support for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-enum-support-for-dot-net-core.md)
 * [OData Bulk Updates](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-bulk-updates.md)
 * [OData Efficient Use of Query Capabilities](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-efficient-use-of-query-capabilities.md)
 * [OData Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-setup-for-dot-net-core.md)
