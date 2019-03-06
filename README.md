@@ -27,6 +27,7 @@
 * [Enum Support for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-enum-support-for-dot-net-core.md)
 * [OData Bulk Updates](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-bulk-updates.md)
 * [OData Efficient Use of Query Capabilities](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-efficient-use-of-query-capabilities.md)
+* [OData Non-Root Level Repeating Objects](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-non-root-level-repeating-objects.md)
 * [OData Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-setup-for-dot-net-core.md)
 * [REST Design Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/api-rest-design-recommendations.md)
 * [Swagger/Open API for ASP.Net Core using Swashbuckle](https://github.com/PaulGilchrist/documents/blob/master/articles/api-swagger-openapi-for-asp-net-core-using-swashbuckle.md)
