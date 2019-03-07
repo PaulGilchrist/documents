@@ -2,48 +2,48 @@
 
 ## Git
 
-* [Usage in VSCode or Visual Studio](https://github.com/PaulGilchrist/documents/blob/master/articles/git-usage-in-vscode-or-visual-studio/git-usage-in-vscode-or-visual-studio.md)
+* [Usage in VSCode or Visual Studio](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-usage-in-vscode-or-visual-studio/git-usage-in-vscode-or-visual-studio.md)
 
 ## Angular
 
-* [Adding Azure Application Insights](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-adding-azure-app-insights.md)
-* [Adding Bootstrap 4](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-adding-bootstrap-4.md)
-* [Azure SSO Authentication and Authorization](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-azure-sso-authentication-and-authorization.md)
-* [Module and Folder Structure Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-module-and-folder-structure-recomendations.md)
-* [Supporting Multiple Environments (development, QA, staging, production, etc)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-supporting-multiple-environments.md)
-* [VSTS Build Steps to Leverage Environment Files, and Test Scripts](https://github.com/PaulGilchrist/documents/blob/master/articles/angular-vsts-build-steps.md)
+* [Adding Azure Application Insights](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-adding-azure-app-insights.md)
+* [Adding Bootstrap 4](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-adding-bootstrap-4.md)
+* [Azure SSO Authentication and Authorization](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-azure-sso-authentication-and-authorization.md)
+* [Module and Folder Structure Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-module-and-folder-structure-recomendations.md)
+* [Supporting Multiple Environments (development, QA, staging, production, etc)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-supporting-multiple-environments.md)
+* [VSTS Build Steps to Leverage Environment Files, and Test Scripts](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-vsts-build-steps.md)
 
 ## Containers
 
-* [Using Docker on Windows](https://github.com/PaulGilchrist/documents/blob/master/articles/docker-on-windows.md)
+* [Using Docker on Windows](https://github.com/PaulGilchrist/documents/blob/master/articles/containers/docker-on-windows.md)
 
 ## API
 
-* [Adding Azure Application Insights](https://github.com/PaulGilchrist/documents/blob/master/articles/api-adding-azure-app-insights.md)
-* [Authentication Setup for Basic Tokens on ASP.NET Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-authentication-setup-for-basic-tokens-on-asp-net-core.md)
-* [Authentication Setup for Bearer Tokens on ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-authentication-setup-for-bearer-tokens-on-asp-net-core.md)
-* [Caching](https://github.com/PaulGilchrist/documents/blob/master/articles/api-caching.md)
-* [Compression for IIS or NodeJS](https://github.com/PaulGilchrist/documents/blob/master/articles/api-compression-for-iis-or-nodejs.md)
-* [Enum Support for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-enum-support-for-dot-net-core.md)
-* [OData Bulk Updates](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-bulk-updates.md)
-* [OData Efficient Use of Query Capabilities](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-efficient-use-of-query-capabilities.md)
-* [OData Non-Root Level Repeating Objects](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-non-root-level-repeating-objects.md)
-* [OData Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-setup-for-dot-net-core.md)
-* [REST Design Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/api-rest-design-recommendations.md)
-* [Swagger/Open API for ASP.Net Core using Swashbuckle](https://github.com/PaulGilchrist/documents/blob/master/articles/api-swagger-openapi-for-asp-net-core-using-swashbuckle.md)
-* [Throttling / Rate Limiting for ASP.NET Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-throttling-rate-limiting-for-asp-net-core.md)
-* [Throttling / Rate Limiting for ASP.NET Full Framework](https://github.com/PaulGilchrist/documents/blob/master/articles/api-throttling-rate-limiting-for-asp-net-full-framework.md)
-* [Versioning Setup for OData on ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/api-odata-versioning-setup-for-asp-net-core.md)
+* [Adding Azure Application Insights](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-adding-azure-app-insights.md)
+* [Authentication Setup for Basic Tokens on ASP.NET Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-authentication-setup-for-basic-tokens-on-asp-net-core.md)
+* [Authentication Setup for Bearer Tokens on ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-authentication-setup-for-bearer-tokens-on-asp-net-core.md)
+* [Caching](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-caching.md)
+* [Compression for IIS or NodeJS](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-compression-for-iis-or-nodejs.md)
+* [Enum Support for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-enum-support-for-dot-net-core.md)
+* [OData Bulk Updates](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-bulk-updates.md)
+* [OData Efficient Use of Query Capabilities](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-efficient-use-of-query-capabilities.md)
+* [OData Non-Root Level Repeating Objects](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-non-root-level-repeating-objects.md)
+* [OData Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-setup-for-dot-net-core.md)
+* [REST Design Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-rest-design-recommendations.md)
+* [Swagger/Open API for ASP.Net Core using Swashbuckle](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-swagger-openapi-for-asp-net-core-using-swashbuckle.md)
+* [Throttling / Rate Limiting for ASP.NET Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-throttling-rate-limiting-for-asp-net-core.md)
+* [Throttling / Rate Limiting for ASP.NET Full Framework](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-throttling-rate-limiting-for-asp-net-full-framework.md)
+* [Versioning Setup for OData on ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-versioning-setup-for-asp-net-core.md)
 
 
 ## Azure
 
-* [App Registration Setup (including manifest roles, and group to role assignments)](https://github.com/PaulGilchrist/documents/blob/master/articles/azure-app-registration-setup.md)
+* [App Registration Setup (including manifest roles, and group to role assignments)](https://github.com/PaulGilchrist/documents/blob/master/articles/azure/azure-app-registration-setup.md)
 
 ## Training
 
-* [Priorities](https://github.com/PaulGilchrist/documents/blob/master/articles/training-priorities.md)
-* [Topics](https://github.com/PaulGilchrist/documents/blob/master/articles/training-topics.md)
+* [Priorities](https://github.com/PaulGilchrist/documents/blob/master/articles/training/training-priorities.md)
+* [Topics](https://github.com/PaulGilchrist/documents/blob/master/articles/training/training-topics.md)
 
 >## Drafts
 >
