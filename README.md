@@ -1,9 +1,5 @@
 # Development Patterns, Practices, and Training Document Library
 
-## Git
-
-* [Usage in VSCode or Visual Studio](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-usage-in-vscode-or-visual-studio/git-usage-in-vscode-or-visual-studio.md)
-
 ## Angular
 
 * [Adding Azure Application Insights](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-adding-azure-app-insights.md)
@@ -12,10 +8,6 @@
 * [Module and Folder Structure Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-module-and-folder-structure-recomendations.md)
 * [Supporting Multiple Environments (development, QA, staging, production, etc)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-supporting-multiple-environments.md)
 * [VSTS Build Steps to Leverage Environment Files, and Test Scripts](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-vsts-build-steps.md)
-
-## Containers
-
-* [Using Docker on Windows](https://github.com/PaulGilchrist/documents/blob/master/articles/containers/docker-on-windows.md)
 
 ## API
 
@@ -35,10 +27,17 @@
 * [Throttling / Rate Limiting for ASP.NET Full Framework](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-throttling-rate-limiting-for-asp-net-full-framework.md)
 * [Versioning Setup for OData on ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-versioning-setup-for-asp-net-core.md)
 
-
 ## Azure
 
 * [App Registration Setup (including manifest roles, and group to role assignments)](https://github.com/PaulGilchrist/documents/blob/master/articles/azure/azure-app-registration-setup.md)
+
+## Containers
+
+* [Using Docker on Windows](https://github.com/PaulGilchrist/documents/blob/master/articles/containers/docker-on-windows.md)
+
+## Git
+
+* [Usage in VSCode or Visual Studio](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-usage-in-vscode-or-visual-studio/git-usage-in-vscode-or-visual-studio.md)
 
 ## Training
 
