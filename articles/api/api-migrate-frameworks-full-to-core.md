@@ -18,7 +18,7 @@ After going through this process a few times, it should take less that an hour f
    * Frequently easier to just look at table columns in `SQL Server Management Studio` when mapping existing EDH model to context entity.  Even when scaffolding, you need to first use a tool like SQL Server Management Studio to find the table name to scaffold
    * If scaffolding, make sure the output is to a dedicated `Scaffold` folder and not to the `Models` folder other than the models.  This prevents overwriting non-scaffolded models, and allows easy comparisons between the API's model, and database's scaffolded model.
 
-```ps
+```bash
 Scaffold-DbContext "data source=<database-dns-name>;initial catalog=<database-name>;persist security info=True;user id=<username>;password=<password>;MultipleActiveResultSets=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Scaffold -Tables org.Division
 ```
 
