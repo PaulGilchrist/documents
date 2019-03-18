@@ -51,8 +51,7 @@
 >
 >## Needed
 >
-> * OData Bulk Updates
-> * API Security - Column and Row Level
+> * Exception Handling * Custom Telemetry
 > * Entity Framework Code First in ASP.Net Core
 > * OData Routing to non-unique object names (ex: Tags, Notes, Documents, etc.)
 > * API Event Grid Integration
