@@ -1,8 +1,8 @@
 # Converting an Object from ASP.Net Full Framework to Core Framework
 
-This document will walk through the steps needed to duplicate one API object & controller in an ASP.Net Full Framework project over to an ASP.Net Core project.  This document assumes you have already build the foundation for the ASP.Net Core project to match the capabilities of the existing Full Framework project (such as OData, Swagger, OAuth, etc.).  See separate documentation within this library, related to ASP.Net Core setup of these foundational capabilities.
+This document will walk through the steps needed to duplicate one API object & controller in an ASP.Net Full Framework project over to an ASP.Net Core project.  This document assumes you have already built the foundation for the ASP.Net Core project to match the capabilities of the existing Full Framework project (such as OData, Swagger, OAuth, etc.).  See separate documentation within this library, related to ASP.Net Core setup of these foundational capabilities.
 
-After going through this process a few times, it should take less that an hour for the average controller, but you should allow more time initially when learning this process, and the project differences as a whole.
+After going through this process a few times, it should take less than an hour for the average controller, but you should allow more time initially when learning this process, and the project differences as a whole.
 
 ## Steps
 
