@@ -18,8 +18,6 @@
 * [Compression for IIS or NodeJS](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-compression-for-iis-or-nodejs.md)
 * [Enum Support for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-enum-support-for-dot-net-core.md)
 * [Migrate from ASP.Net Full Framework to Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-migrate-frameworks-full-to-core.md)
-
-api-migrate-frameworks-full-to-core
 * [OData Bulk Updates](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-bulk-updates.md)
 * [OData Efficient Use of Query Capabilities](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-efficient-use-of-query-capabilities.md)
 * [OData Non-Root Level Repeating Objects](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-non-root-level-repeating-objects.md)
