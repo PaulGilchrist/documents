@@ -11,7 +11,8 @@
 
 ## API
 
-* [Adding Azure Application Insights](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-adding-azure-app-insights.md)
+* [Adding Azure Application Insights to ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-adding-azure-app-insights-to-dot-net-core.md)
+* [Adding Azure Application Insights to ASP.Net Full Framework](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-adding-azure-app-insights-to-dot-net-full.md)
 * [Authentication Setup for Basic Tokens on ASP.NET Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-authentication-setup-for-basic-tokens-on-asp-net-core.md)
 * [Authentication Setup for Bearer Tokens on ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-authentication-setup-for-bearer-tokens-on-asp-net-core.md)
 * [Caching](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-caching.md)
