@@ -1,4 +1,4 @@
-# API - Adding Azure Application Insights
+# API - Adding Azure Application Insights to ASP.Net Core
 
 Azure Application Insights allows for collecting, reporting, and alerting on both server and client side telemetry.  Common server side telemetry includes requests, events, exceptions, and trace data.  The following steps will add the ability for a new or existing .Net Core application to send Application Insights telemetry to Azure and include information from the HTTP context such as user identity:
 

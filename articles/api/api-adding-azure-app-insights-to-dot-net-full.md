@@ -13,10 +13,7 @@ Azure Application Insights allows for collecting, reporting, and alerting on bot
             var httpContext = HttpContext.Current;
             // If called as part of request execution and not from some async thread
             if (httpContext!=null && httpContext.User!=null) {
-                var requestTelemetry = httpContext.GetRequestTelemetry();
-                if (requestTelemetry!=null) {
-                    requestTelemetry.Context.User.Id=httpContext.User.Identity.Name;
-                }
+                telemetry.Context.User.Id = httpContext.User.Identity.Name;
             }
         }
     }
