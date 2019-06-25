@@ -32,7 +32,7 @@ context.UserNotes.Add(new UserNote { User = context.Users.Find(1), Note = "User 
 context.AddressNotes.Add(new AddressNote { Address = context.Addresses.Find(1), Note = "Address specific note" });
 ```
 
-4. Do NOT define the `UserNotes` or `AddressNotes` objects as OData EntitySets.  OData has a requirement that and entity cannot both belong to an entity set declared within the entity container and be referenced by a containment relationship.  [Reference](http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/part3-csdl/odata-v4.0-errata03-os-part3-csdl-complete.html#_Toc453752542)
+4. Do NOT define the `UserNotes` or `AddressNotes` objects as OData EntitySets.  OData has a requirement that an entity cannot both belong to an entity set declared within the entity container and be referenced by a containment relationship.  [Reference](http://docs.oasis-open.org/odata/odata/v4.0/errata03/os/complete/part3-csdl/odata-v4.0-errata03-os-part3-csdl-complete.html#_Toc453752542)
    * If using full framework, then you WOULD define the object only as part of its parent, using the format `builder.EntitySet<User>("users").HasManyBinding<UserNote>(o => o.Notes, "notes");`, but this is not needed for ASP.Net Core.
 
 5. Creat the API endpoint in the parent object's controller.  The parent object must have an OData EntitySet defined, and the path to the repeating object must be within the parent's path.

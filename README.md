@@ -29,6 +29,7 @@
 * [Throttling / Rate Limiting for ASP.NET Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-throttling-rate-limiting-for-asp-net-core.md)
 * [Throttling / Rate Limiting for ASP.NET Full Framework](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-throttling-rate-limiting-for-asp-net-full-framework.md)
 * [Versioning Setup for OData on ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-versioning-setup-for-asp-net-core.md)
+* [Versioning Usage](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-versioning-usage.md)
 
 ## Azure
 

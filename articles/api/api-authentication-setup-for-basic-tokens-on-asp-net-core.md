@@ -105,10 +105,9 @@ namespace API.Classes {
 6. In file `Startup.cs` function `ConfigureServices` add the following code under OAuth authentication (if exists), or near the beginning of the function:
 
 ```cs
-            // Configure Basic Authentication
-            services.AddAuthentication("BasicAuthentication")
-                .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
-
+// Configure Basic Authentication
+services.AddAuthentication("BasicAuthentication")
+    .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 ```
 
 7. In file `Startup.cs` function `Configure` just above `app.UseMvc()` add the following code (if not already existing):
