@@ -12,7 +12,9 @@ Azure Application Insights allows for collecting, reporting, and alerting on bot
     },
 ```
 
-3. In the app module, create a new service named `app-insights.service.ts` with the following code:
+3. Create a "services" folder under the "app" folder if it does not exist already.  This will be used for application specific services only and not for module scoped services
+
+4. In the app module, create a new service named `app-insights.service.ts` with the following code:
    * If you are not using `adal-angular4` for authentication, adjust the code accordingly.
 
 ```javascript
@@ -66,9 +68,9 @@ export class AppInsightsService {
 }
 ```
 
-4. In the app module file, import the newly created service and add it to the `providers` section
+5. In the app module file, import the newly created service and add it to the `providers` section
 
-5. In any component where you want to send telemetry, include the App Insights service and call the appropriate function matching the type of telemetry to send.  Example below:
+6. In any component where you want to send telemetry, include the App Insights service and call the appropriate function matching the type of telemetry to send.  Example below:
 
 ```javascript
 import { AppInsightsService } from '../../services/app-insights.service';

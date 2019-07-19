@@ -25,8 +25,8 @@ providers: [
 
 ```javascript
 azureAuthProvider: {
-	'clientId': 'bd065891-b008-4968-9b26-5f2bcb9c1b66',
-	'tenant': 'pulte.onmicrosoft.com'
+	clientId: 'bd065891-b008-4968-9b26-5f2bcb9c1b66',
+	tenant: 'pulte.onmicrosoft.com'
 }
 ```
 
@@ -34,6 +34,8 @@ azureAuthProvider: {
 
 ```javascript
 import { AdalService } from 'adal-angular4';
+import { environment } from './../environments/environment';
+
 constructor(private adalService: AdalService) {
 	// init requires object with clientId and tenant properties
 	adalService.init(environment.azureAuthProvider);
@@ -141,6 +143,8 @@ export class AuthInterceptor implements HttpInterceptor {
 3. Add the following to `the app.module.ts`.  When adding this code, do not remove any existing providers.
 
 ```javascript
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true, }
 ]
