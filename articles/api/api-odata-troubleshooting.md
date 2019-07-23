@@ -126,7 +126,34 @@ This query does not properly limit the results to only the one contact identifie
 
 Until Microsoft or the OData development team correct this bug, we need to implement a workaround.  The workaround would be to execute the initial ```salesAgreement``` query without the nested ```contact``` object, and then separatly get the ```contact``` object and attach it to ```opportunityContactAssoc``` manually.
 
-The below code would achieve that workaround:
+The below client side Angular code would achieve that workaround as would implimenting a similar method on a server side proxy API:
 
-```cs
+```typescript
+var headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set("Authorization", `Basic ${this._key}`);
+const httpOptions = {
+    headers: headers
+};
+let salesAgreementUrl = `${this._baseUrl}/salesAgreements(616)?$expand=`
+    + `jobSalesAgreementAssocs($filter=isActive eq true;$select=id;$expand=`
+        + `job($select=id;$expand=`
+            + `lot($select=lotBlock)`
+            + `,financialCommunity($select=id,number;$expand=market($select=number))))`
+    + `,buyers($select=id;$filter=isPrimaryBuyer eq true;$expand=`
+        + `opportunityContactAssoc($select=id,contactId))`;
+this.http.get<SalesAgreement>(salesAgreementUrl, httpOptions).subscribe(
+    (salesAgreement) => {
+        // Get contact
+        let contactUrl = `${this._baseUrl}/contacts(${salesAgreement.buyers[0].opportunityContactAssoc.contactId})?$select=firstName,lastName`
+        this.http.get<Contact>(contactUrl, httpOptions).subscribe(
+            (contact) => {
+                salesAgreement.buyers[0].opportunityContactAssoc.contact = contact;
+                console.log(salesAgreement);
+            }
+        );
+    }
+);
 ```
+
+The above is an example only and should would have full error handline, and a separate authorization interceptor at a minimum if used in production.  It should also bne noted, that removing more expands from the above example will show additional performance improvements.
