@@ -14,6 +14,8 @@ OData (Open Data Protocol) defines a set of best practices for building and cons
 
 ## Best Practices
 
+### Performance Best Practices
+
 * ```Return no more data than is necessary``` - Combine OData parameters to return the absolute minimum data required by the requesting application ensuring the lowest bandwidth consumption, latency, and cost while simultaneously supplying the highest performance and scalability.  Below is an example of how these can be combined together in complex ways:
 
 ```http
@@ -28,9 +30,60 @@ odata/users?$select=id,firstName,lastName&$filter=status eq ‘active’&$top=10
 * ```Keep API calls re-usable and loosely coupled``` - Even when proxying back to another remote API, it is always best to keep all API endpoints re-usable and loosely coupled.  This allows the client application to retain control of the OData properties passed through to the remote API, and reduces both the code required, and the work performed by the proxy API.  Basically, the proxy API simply passes along the request and responses without any serialization/deserialization, or model definitions.
 * ```Leverage the linear scalability of the client``` - Server side processing does not scale linearly like client side does.  When doing things like sorting ($orderBy), take advantage of each client's dedicated processors rather than overworking the server makeing it handle all concurrent sorting requests.
 
+### Implementation Best Practices
+
+* ```Understand RESTful design best practices```
+  * URLs - Plural nouns for endpoints
+    * No verbs or behavioral names
+    * Path from root or must match relationship hierarchy
+    * Passed filters determine how many results are returned
+      * ID for singular, OData for advanced query
+  * HTTP actions (GET, POST, PUT, PATCH, DELETE)
+    * Wrong: GetArea, CreateDivision, UpdateEmployee
+    * Right: Areas, Divisions, Employees
+  * GET, PUT, and DELETE methods must be Idempotent
+    * Regardless of times called, the result will be the same
+    * POST can also be idempotent through SQL uniqueness constraints and API trapping of those constraints and returning a 409 (conflict) error with details of what constraint failed
+  * Human readable data
+    * Wrong: status = 0, 1, 2, 3, 4, etc.
+    * Right: status = pending, approved, rejected, complete, etc.
+  * Property Names - camelCase objects and properties
+    * No underscores or word separators as they are unconventional for JavaScript
+  * Time - UTC following ISO 8601 standard
+  * Stateless and tolerant of transient failures
+    * Retry logic (built into EF)
+    * Valuable for all cloud development not just REST APIs
+  * Consistent HTTP codes with details in body
+    * 200 (ok), 201 (created), 202 (accepted), 304 (not modified), 400 (bad request), 401 (unauthorized), 403 (forbidden), 404 (not found), 409 (conflict), 412 (precondition failed), etc.
+* ```Understand OData and leverage for optimized requests```
+  * Expand, Filter, Select, OrderBy, Top, Skip, Count
+* ```Code for efficient bandwidth use and reduced costs```
+  * OData Expand Example:
+    * areas -> divisions -> branches -> employees
+  * Caching: Client is better than App API which is better than remote API
+    Can leverage ETag or change notifications if available
+* ```Leverage Swagger for discovery```
+  * Communicate to API team if discovery information is missing (ex: roles required)
+* ```Application API’s should also use REST, OData, OAuth, and Swagger```
+* ```Understand OAuth tokens and API keys```
+  * Stateless means passed in header on every request
+  * User to API = OAuth bearer token (with roles)
+    * Implicit flow
+  * API to API = API key (Azure app settings define roles)
+  * Claims\Roles
+* ```Understand cloud development best practices```
+  * Asynchronous and parallel
+  * Azure costs – client offloading, bandwidth usage reduction
+    * Bandwidth free within an Azure regional datacenter
+  * Latency – prefetching, caching, background workers
+  * Make no assumptions about underlying infrastructure, location, IP, etc.
+  * Let DevOps manage keys (Azure App Settings)
+  * Leverage App Insights custom telemetry, and troubleshoot EDH there also
+
 ## References
 
 * OData Specification and detailed documentation - [odata.org]( https://www.odata.org/)
+* See document [REST Design Recommendations](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-rest-design-recommendations.md)
 * See document [API - OData Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api-odata-setup-for-dot-net-core.md) for proper implementation of OData
 * See document [API - Swagger/Open API for ASP.Net Core using Swashbuckle](https://github.com/PaulGilchrist/documents/blob/master/articles/api-swagger-openapi-for-asp-net-core-using-swashbuckle.md) for proper configuration of OData controller function comments and annotation recomendations
 * See [GitHub odate-core-template](https://github.com/PaulGilchrist/odata-core-template) for full source code of a working example of all above steps
