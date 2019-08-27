@@ -243,4 +243,4 @@ services.AddDbContext<ApiContext>(options => options.UseSqlServer(connection), S
 
 ## References
 * See [GitHub odate-core-template](https://github.com/PaulGilchrist/odata-core-template) for full source code of a working example of the above recomendations
-* See [GitHub odate-core-template](https://github.com/PaulGilchrist/documents) for additional API best practice and training documentation
+* See [Development Patterns, Practices, and Training Document Library](https://github.com/PaulGilchrist/documents) for additional API best practice and training documentation
