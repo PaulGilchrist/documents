@@ -20,7 +20,7 @@ OData (Open Data Protocol) defines a set of best practices for building and cons
 
   * Use $select to return only those columns that are needed in your query (applies to each $expand-ed level of the query)
   * Use $filter to return only those records that you need for your query (again, at every level)
-  * Specify a multi-level $filter from the top level when you want to filter data in $expand-ed collections 
+  * Specify a multi-level $filter from the top level when you want to filter data in $expand-ed collections
     * “$expand=financialVendor&$filter=financialVendor/marketId eq 114” works but “$expand=financialVendor($filter=marketId eq 114)” does not
   * If you only need the count, pass $count=true and $top=0
   * If you only need the $expand-ed data and nothing on the top level, just $select the expanded property.
@@ -105,6 +105,18 @@ The next example is not re-usable or loosely coupled:
 ```
 
 * ```Leverage the linear scalability of the client``` - Server side processing does not scale linearly with the number of clients accessing the API.  Conversly, client side processing guarantees as the number of concurrent clients increase, the number of processors available to do work, also increases.  When doing things like sorting ($orderBy), take advantage of each client's dedicated processors rather than overworking the server making it handle all concurrent sorting requests.  This may not always be possible as in the case where the $orderBy is needed in combination with a $top to ensure the correct top X objects are returned.
+
+* ```Prevent OData from making N+1 calls to SQL when using $expand``` - OData version 7.1 and earlier has an issue where all $expand calls would execute separate SQL queries for each parent object.  As the level of $expand nesting increased, the SQL queries would increase exponentially.  The following links describe this issue in more detail:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Expand causes N +1 query problem #1463](https://github.com/OData/WebApi/issues/1463)  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Fixing N+1 query bug on expands #1653](https://github.com/OData/WebApi/pull/1653)  
+This issue is actually caused by Microsoft's Entity Framework and is not considered a bug by Microsoft as described here:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Apply correlated collection optimization even when subquery is streaming #11748](https://github.com/aspnet/EntityFrameworkCore/issues/11748)  
+OData 7.2 fixed this issue for $expands for all one to many or many to one relationships, but the N+1 behavior still exists for many to many relationships.  To fix the N+1 behavior for many to many relationships, add the following code to the impacted controller's GET action:
+
+```cs
+public async Task<IActionResult> Get(ODataQueryOptions<T> queryOptions) {
+    ((ODataQuerySettings)queryOptions.Context.RequestContainer.GetService(typeof(ODataQuerySettings))).EnableCorrelatedSubqueryBuffering = true;
+```
 
 ### Implementation Best Practices
 
