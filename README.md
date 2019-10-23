@@ -4,10 +4,11 @@
 
 * [Adding Azure Application Insights](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-adding-azure-app-insights.md)
 * [Adding Bootstrap 4](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-adding-bootstrap-4.md)
+* [Azure SSO Authentication and Authorization](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-azure-sso-authentication-and-authorization.md)
 * [Creating Reusable NPM Packages](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-creating-reusable-npm-packages.md)
 * [Form Validation](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-form-validation.md)
-* [Azure SSO Authentication and Authorization](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-azure-sso-authentication-and-authorization.md)
 * [Module and Folder Structure Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-module-and-folder-structure-recomendations.md)
+* [Service Workers - Progressive Web Applications (PWA)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-service-workers.md)
 * [Supporting Multiple Environments (development, QA, staging, production, etc)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-supporting-multiple-environments.md)
 * [VSTS Build Steps to Leverage Environment Files, and Test Scripts](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-vsts-build-steps.md)
 

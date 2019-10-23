@@ -129,6 +129,8 @@ npm login
 npm publish
 ```
 
-The main application can contain any numbner of libraries with each of them still being publishable as separate NPM packages.  At this point, if another library is needed, just follow this process again starting from step #2 above.  All the code shown in this document along with another library containing 2 Angular pipes for sorting and filtering can be found here [https://github.com/PaulGilchrist/angular-libraries](https://github.com/PaulGilchrist/angular-libraries)
+10. At this point, any other development efforts can include the new library into their codebase using the smae ```npm install``` methods as with any 3rd party packages.
+
+The main application can contain any numbner of libraries with each of them still being publishable as separate NPM packages.  If another library is needed, just follow this process again starting from step #2 above.  All the code shown in this document along with another library containing 2 Angular pipes for sorting and filtering can be found here [https://github.com/PaulGilchrist/angular-libraries](https://github.com/PaulGilchrist/angular-libraries)
 
 For a more detailed walk-through, follow this guide [Building and publishing Angular libraries using Angular CLI](https://medium.com/@faxemaxee/building-and-publishing-angular-libraries-using-angular-cli-140057d21101)
