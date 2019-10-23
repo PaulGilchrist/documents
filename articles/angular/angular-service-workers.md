@@ -20,7 +20,7 @@ npm install -g http-server
 
 3. Build and run the production project for testing the new Service Worker capabilities
 
-    * <project-name> is only needed if your project is in a subfolder under ```dist/```
+    * ```<project-name>``` is only needed if your project is in a subfolder under ```dist/```
 
 ```cmd
 ng build --prod

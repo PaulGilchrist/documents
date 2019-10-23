@@ -11,6 +11,7 @@
 * [Service Workers - Progressive Web Applications (PWA)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-service-workers.md)
 * [Supporting Multiple Environments (development, QA, staging, production, etc)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-supporting-multiple-environments.md)
 * [VSTS Build Steps to Leverage Environment Files, and Test Scripts](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-vsts-build-steps.md)
+* [Web Push Notifications](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-web-push-notifications.md)
 
 ## API
 
