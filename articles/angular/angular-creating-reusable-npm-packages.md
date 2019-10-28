@@ -123,7 +123,7 @@ export class AppComponent implements OnInit, OnDestroy {
 9. Once satisfied the library is ready, publish it to NPM.  You will need to have an account on [https://www.npmjs.com/](https://www.npmjs.com/).  packages can be published as public or private, and managed by an organization or an individual.
 
 ```cmd
-ng build angular-connectivity --prod
+ng build angular-connectivity
 cd dist/angular-connectivity
 npm login
 npm publish
