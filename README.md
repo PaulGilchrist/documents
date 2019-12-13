@@ -46,7 +46,7 @@
 
 ## Git
 
-* [Usage in VSCode or Visual Studio](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-usage-in-vscode-or-visual-studio/git-usage-in-vscode-or-visual-studio.md)
+* [GIT Branching Recommendations](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-branching-recommendations.md)
 
 ## Training
 
