@@ -10,6 +10,7 @@
 * [Module and Folder Structure Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-module-and-folder-structure-recomendations.md)
 * [Service Workers - Progressive Web Applications (PWA)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-service-workers.md)
 * [Supporting Multiple Environments (development, QA, staging, production, etc)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-supporting-multiple-environments.md)
+* [Template Setup Step-by-Step](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-template-setup-step-by-step.md)
 * [VSTS Build Steps to Leverage Environment Files, and Test Scripts](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-vsts-build-steps.md)
 * [Web Push Notifications](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-web-push-notifications.md)
 
