@@ -59,8 +59,12 @@ This document lists skills both required and useful for the different developer 
 
 ### Required Skills - Database Developer
 
-* T-SQL
 * Azure SQL Database
+* Power BI
+* SQL Server Management Studio 2017+
+* SQL Server Integration Services
+* SQL Server Reporting Services
+* T-SQL
 
 ## Additional Useful Skills
 
