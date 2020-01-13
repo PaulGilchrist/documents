@@ -5,6 +5,7 @@
 * [Adding Azure Application Insights](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-adding-azure-app-insights.md)
 * [Adding Bootstrap 4](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-adding-bootstrap-4.md)
 * [Azure SSO Authentication and Authorization](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-azure-sso-authentication-and-authorization.md)
+* [Client Tools Setup](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-client-tools-setup.md)
 * [Creating Reusable NPM Packages](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-creating-reusable-npm-packages.md)
 * [Form Validation](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-form-validation.md)
 * [Module and Folder Structure Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-module-and-folder-structure-recomendations.md)
