@@ -54,14 +54,3 @@
 
 * [Priorities](https://github.com/PaulGilchrist/documents/blob/master/articles/training/training-priorities.md)
 * [Topics](https://github.com/PaulGilchrist/documents/blob/master/articles/training/training-topics.md)
-
->## Drafts
->
->* [Angular - Upgrading from Angular 5 to Angular 6]>(https://github.com/PaulGilchrist/documents/blob/master/articles/angular-upgrading-from-angular-5-to-angular-6.md)
->
->## Needed
->
-> * Exception Handling * Custom Telemetry
-> * Entity Framework Code First in ASP.Net Core
-> * OData Routing to non-unique object names (ex: Tags, Notes, Documents, etc.)
-> * API Event Grid Integration
