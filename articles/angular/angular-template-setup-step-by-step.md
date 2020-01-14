@@ -4,7 +4,7 @@ The following steps can be used to start a new Angular project and ensure you ar
 
 ## Steps
 
-1. Ensure all tools are up to date
+1. Ensure all tools are up to date (see [Template Setup Step-by-Step](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-template-setup-step-by-step.md))
    * node, npm, vs code, git, @angular/cli, typescript, etc.
 
 ```cmd
@@ -182,9 +182,9 @@ export const environment = {
 @import '~ngx-toastr/toastr-bs4-alert';
 ```
 
-19. Optional - App the following to the `Application Imports` section of the file `src/polyfills.ts`
+19. Optional - Add the following to the `Application Imports` section of the file `src/polyfills.ts`
 
-20. Add the following code to the `AppComponent` to initialize `adalAngular.js`, force login, and send telemetry to `1`Azure App Insights`
+20. Add the following code to the `AppComponent` to initialize `adalAngular.js`, force login, and send telemetry to `Azure App Insights`
 
 ```js
 constructor(private adalService: AdalService, private appInsightsService: AppInsightsService, private router: Router) {
@@ -398,7 +398,7 @@ This component is not meant to remain all the way through to production, but mak
 </div>
 ```
 
-3. Add the following code to the file `src/app/components/token.component.html`.
+3. Add the following code to the file `src/app/components/token.component.scss`.
 
 ```css
 /* set class and add a tooltip attribute to show tooltip popup */
