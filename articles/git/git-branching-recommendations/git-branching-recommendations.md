@@ -20,7 +20,7 @@ When a production bug occurs, a hot-fix branch is created from the current produ
 
 If reviewing Microsoft's branching documentation, not that the 2018 document discusses merging from/to master first then cherry-picking into release, but in the 2019 documentation this was changed to merging from/to release first then cherry-picking into `master`.
 
-![GIT Process Flow](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-branching-recommendations/git-process-flow.md)
+![](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-branching-recommendations/git-process-flow.png)
 
 ## Appendix
 
