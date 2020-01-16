@@ -48,7 +48,7 @@
 
 ## Git
 
-* [GIT Branching Recommendations](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-branching-recommendations.md)
+* [GIT Branching Recommendations](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-branching-recommendations/git-branching-recommendations.md)
 
 ## Training
 
