@@ -1,24 +1,26 @@
 # GIT Branching Recommendations
 
-The 3 most commonly used branching methodologies include [Git-Flow](https://nvie.com/posts/a-successful-git-branching-model/), [GitHub-Flow](https://githubflow.github.io/), and [Microsoft's Trunk Based Branching](https://docs.microsoft.com/en-us/azure/devops/repos/git/git-branching-guidance?view=azure-devops).  Git-Flow is designed for very large projects with scheduled release cycles, but is also the most complex.  GitHub-Flow is the simplest, but designed for continuous deployment at the story vs sprint level with more of a roll-forward than rollback approach.  Microsoft's Trunk Based Branching methodology (also called [Release-Flow](https://docs.microsoft.com/en-us/azure/devops/learn/devops-at-microsoft/release-flow)) is more complex that GitHub-Flow but simpler than Git-Flow, while still supporting enterprise sized applications with sprint based deployment cycles.  None of these methodologies directly addresses our requirements for 4 or more permanent environments (dev, qa, staging, and production), but Microsoft's trunk based branching method comes the closest and is the one recommended.
+The 3 most commonly used branching methodologies include [Git-Flow](https://nvie.com/posts/a-successful-git-branching-model/), [GitHub-Flow](https://githubflow.github.io/), and [Microsoft's Trunk Based Branching](https://docs.microsoft.com/en-us/azure/devops/repos/git/git-branching-guidance?view=azure-devops).  Git-Flow is designed for very large projects with scheduled release cycles but is also the most complex.  GitHub-Flow is the simplest but designed for continuous deployment at the story vs sprint level, with more of a roll-forward than rollback approach.  Microsoft's Trunk Based Branching methodology (also called [Release-Flow](https://docs.microsoft.com/en-us/azure/devops/learn/devops-at-microsoft/release-flow)) is more complex that GitHub-Flow but simpler than Git-Flow, while still supporting enterprise sized applications using sprint based deployment cycles.  None of these methodologies directly address our requirements for 4 or more permanent environments (dev, qa, staging, and production), but Microsoft's trunk-based branching method comes the closest and is the one recommended.
 
-Microsoft has a proven track record, using and recommending GIT for all their applications (since 2012).  Microsoft owns the worlds largest GIT repository (Windows), and also owns GitHub, the world's largest GIT repository.  This branching methodology is based on a single trunk (named master) which auto-deploys through CI/CD to the development environment.  
+Microsoft has a proven track record, using and recommending GIT for all their applications (since 2012).  Microsoft owns the worlds largest GIT repository (Windows), and also owns GitHub, the world's largest GIT repository.  Their branching methodology is based on a single trunk (named master) which auto-deploys through CI/CD to a dev/test environment.  
 
-The `master` branch represents our development environment, and is for code considered complete or incomplete (with deactivated feature flag) when needed by other features.  Master is kept up to date with all completed code, and always buildable.  This allows for fewer merge conflicts, easy code reviews, and is simpler and faster to ship.  One additional long term branch exists for each environment and goes away if or when environment goes away.  The `qa` branch is a merge from `master` and may be cherry-picked if stories need to be held back.  The `staging` branch is always merged from `qa`, and any release is a merge from `staging`.
+The `master` branch represents our development environment and is for code considered complete, unit tested, code reviewed, and ready for QA.  The `master` branch always up to date and buildable.  This allows for fewer merge conflicts, easier code reviews, and simpler and faster deployments.
 
-Release branches are created with limited lifespan, and are what end up in production (not `master`).  Release branches should be named with version number and later, old versioned releases can be removed when no longer supported.
+A `story-<workitem>` branch (sometimes referred to as a feature branch) should be for a small, simple change, merged from `master`.  Once code complete, unit tested, and ready for QA, a `pull request` should be used to merge the story branch back into the `master` branch.  Pull requests include a code review with a recommended 2 minimum reviewers' approval.  An approved pull request should be `squash` merged back into `master` to keep it clean and only containing the final commit of each story.  
 
-None of these branches ever merge back into `master`.  All other branches such as stories, bug fixes, etc. are temporary.  Story branches (sometimes referred to as feature branches) should be for small, simple changes, getting them back into the `master` branch as soon as complete and tested.  Story branches are created from `master` and merge back into `master` through pull requests.  A story is not merged back to master until it complete and fully unit tested.  In a scenario where a story is not complete or not ready for a higher environment, but part of it is needed as a dependency for other stories, it can be merged back into master using a Feature Flag (additional reference) set inactive.  In a scenario where a story is complete but not ready for a higher environment, and not needed as a dependency for other stories, it can be merged back into `master` without using a feature flag, and later cherry-picked out when going to the higher environment that is not ready for this story.  This can happen when another team is not ready to integrate with the changes implemented by this story until a later sprint, but the story had already been merged back into `master`.  Version control capabilities can also be used to handle both of these scenarios.
+A `release-<version-#.#.#>` branch is merged from the `master` branch, but never merged back, as its sole purpose is to deploy code to higher environments (including production).  Release branches are created with limited lifespan and should be named with their version number.  Old release branches should be removed when no longer needed.
 
-Pull requests include a code review with a recommended 2 minimum reviewers approval.  An approved pull request should be squash merged back into `master` to keep it clean and only containing the final commit of each story.  
+Multiple release branches can exist at any one time, but any newly created release branch must contain (at a minimum), all comitts from the previous release branch.  This requirement ensures all comitts in `master` eventually makes it into a release and ultimatly into production or are removed from the `master` branch.
 
-When a production bug occurs, a hot-fix branch is created from the current production release branch and when complete, merged back into that same release branch and any newer release branches (if any exist).  A cherry pick button appears after pull requests are completed allowing it to also be merged into the `master` branch.  Bugs found in lower environments should be treated similarly.  Azure DevOps is optimized for this workflow and guides the developer as follows:
+A release branch is attached to the CI/CD build pipeline associated with one or more environments.  The release branch is ususally moved up the heiarchy one environment at a time until ultimatly reaching production.  When a bug is discovered in a release branch (including production), a `hotfix-<workitem>` branch is created from that release branch and when code complete, `squash` merged back into that same release branch, as well as cherry picked into the `master` branch and any newer release branches.  Azure DevOps is optimized for this workflow and guides the developer as follows:
 
 * Create branch from work item
 * Create pull request recommended after new commit to origin branch
 * Cherry pick button appears after pull request is completed
 
-If reviewing Microsoft's branching documentation, not that the 2018 document discusses merging from/to master first then cherry-picking into release, but in the 2019 documentation this was changed to merging from/to release first then cherry-picking into `master`.
+At any time, new comitts to `master` can be merged or chery picked into a release branch as the sprint progresses, as long as they are also merged into any newer releases.
+
+Review the Microsoft Trunk Based Branching documentation in the Appendix below for more details on this branching strategy.
 
 ![](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-branching-recommendations/git-process-flow.png)
 
@@ -56,57 +58,6 @@ It is valuable to understand how our branching strategy aligns and diverges from
 * [Git Branching and Policies in Team Foundation Server 2015](https://channel9.msdn.com/Events/Visual-Studio/Visual-Studio-2015-Final-Release-Event/Git-Branches-and-Policies-in-Team-Foundation-Server-2015)
 * [Basic Git Commands](https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html)
 
-### Demo - How to Pull Story Branch at last minute (after commit to development) if preferring the command line
-
-* These steps document and demo moving stories from `development` to `qa`, to `staging`, and finally to `production` with some stories being held at lower branches until the business is ready for them
-  * The following branch names are used for this demo
-    * (`master,qa,staging,production,storyNotPastDev,storyNotPastQa,storyNotPastStaging,storyThroughProduction`)
-* Create story branches from `master` branch (development environment)
-  * The demo adds a file to each story with the story name, to make it easier to see what stories make it to each environment
-* Pull request each story branch into the dev branch (as usual), using squash merge and name merge using story # (also as usual)
-  * Merge branch is not needed
-  * Can delete story branch after merge as it is no longer needed
-  * Demo code simulating pull requests merging back into `master`
-
-```js
-git checkout master
-git merge --squash storyNotPastDev
-git merge --squash storyNotPastQa
-git merge --squash storyNotPastStaging
-git merge --squash storyThroughProduction
-git push
-// Safe to delete all the above story branches after they have merged into master
-```
-
-* Cherry pick all stories into `qa` except the one named `storyNotPastDev` simulating a story the business is not yet ready for moving up the environment stack.  It is recommended to cherry-pick in the order from oldest to newest commit to reduce merge conflicts (can also use `gitk --all` or meld for GUI based merge conflicts)
-
-```js
-git log --oneline
-git checkout qa
-git cherry-pick <hash for storyNotPastQa>
-git cherry-pick <hash for storyNotPastStaging>
-git cherry-pick <hash for storyThroughProduction>
-git push
-```
-
-* Cherry pick all stories into `staging` except the one named `storyNotPastQa`.  `storyNotPastDev` will not be available because it never made it to `qa`
-
-```js
-git log --oneline
-git checkout staging
-git cherry-pick <hash for storyNotPastStaging>
-git cherry-pick <hash for storyThroughProduction>
-git push
-```
-
-* Cherry pick all stories into `production` except the one named `storyNotPastStaging`. `storyNotPastDev` and `storyNotPastQa` will not be available because they never made it to `staging`
-
-```js
-git log --oneline
-git checkout master
-git cherry-pick <hash for storyThroughProduction>
-git push
-```
 
 ## Tasks - If preferring the command line
 
