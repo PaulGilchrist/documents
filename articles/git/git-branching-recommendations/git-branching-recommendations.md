@@ -51,7 +51,6 @@ It is valuable to understand how our branching strategy aligns and diverges from
   * Staging (UAT) environment (temporary) builds from release branch that is pulled from master when feature complete
     * Bug fixes started after release branch creation go to master first then cherry picked into release branch
 * Video - [Microsoft - Git Patterns and Anti-Patterns for Successful Developers](https://www.youtube.com/watch?v=t_4lLR6F_yk)
-* [How We Use Git at Microsoft](https://docs.microsoft.com/en-us/azure/devops/learn/devops-at-microsoft/use-git-microsoft)
 * [Resolving a Merge Conflict from the Command Line](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/resolving-a-merge-conflict-using-the-command-line)
 * [How to cherry-pick multiple commits](https://stackoverflow.com/questions/1670970/how-to-cherry-pick-multiple-commits)
 * [Using Git with Microsoft VS Team Foundation Server or VS Team Server Online](https://channel9.msdn.com/Events/Ignite/2015/BRK3709)
