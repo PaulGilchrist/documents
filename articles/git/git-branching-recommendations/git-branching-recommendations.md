@@ -22,7 +22,7 @@ At any time, new comitts to `master` can be merged or chery picked into a releas
 
 Review the Microsoft Trunk Based Branching documentation in the Appendix below for more details on this branching strategy.
 
-![](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-branching-recommendations/git-process-flow.png)
+![](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-branching-recommendations/git-branching-strategy.png)
 
 ## Appendix
 
