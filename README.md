@@ -8,6 +8,7 @@
 * [Client Tools Setup](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-client-tools-setup.md)
 * [Creating Reusable NPM Packages](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-creating-reusable-npm-packages.md)
 * [Form Validation](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-form-validation.md)
+* [Handling Server API Throttling and Paging](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-handling-server-api-throttling-and-paging.md)
 * [Module and Folder Structure Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-module-and-folder-structure-recomendations.md)
 * [Service Workers - Progressive Web Applications (PWA)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-service-workers.md)
 * [Supporting Multiple Environments (development, QA, staging, production, etc)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-supporting-multiple-environments.md)
