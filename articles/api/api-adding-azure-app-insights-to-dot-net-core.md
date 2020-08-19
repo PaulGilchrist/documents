@@ -39,7 +39,14 @@ namespace API.Classes {
 }
 ```
 
-3. Make sure the following code is added below `AddMvc` and within the `ConfigureServices()` function of the `Startup.cs` file
+3. Add the following code above `AddMvc()` and within the `ConfigureServices()` function of the `Startup.cs` file
+
+```cs
+    // The following line enables Application Insights telemetry collection.
+    services.AddApplicationInsightsTelemetry();
+```
+
+3. Add the following code below `AddMvc()` and within the `ConfigureServices()` function of the `Startup.cs` file
 
 ```c#
 services.AddHttpContextAccessor();
