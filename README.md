@@ -19,13 +19,11 @@
 ## API
 
 * [Adding Azure Application Insights to ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-adding-azure-app-insights-to-dot-net-core.md)
-* [Adding Azure Application Insights to ASP.Net Full Framework](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-adding-azure-app-insights-to-dot-net-full.md)
 * [Authentication Setup for Basic Tokens on ASP.NET Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-authentication-setup-for-basic-tokens-on-asp-net-core.md)
 * [Authentication Setup for Bearer Tokens on ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-authentication-setup-for-bearer-tokens-on-asp-net-core.md)
 * [Caching](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-caching.md)
 * [Compression for IIS or NodeJS](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-compression-for-iis-or-nodejs.md)
 * [Enum Support for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-enum-support-for-dot-net-core.md)
-* [Migrate from ASP.Net Full Framework to Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-migrate-frameworks-full-to-core.md)
 * [OData Bulk Updates](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-bulk-updates.md)
 * [OData Efficient Use of Query Capabilities](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-efficient-use-of-query-capabilities.md)
 * [OData Non-Root Level Repeating Objects](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-non-root-level-repeating-objects.md)
@@ -35,7 +33,6 @@
 * [REST Design Recomendations](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-rest-design-recommendations.md)
 * [Swagger/Open API for ASP.Net Core using Swashbuckle](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-swagger-openapi-for-asp-net-core-using-swashbuckle.md)
 * [Throttling / Rate Limiting for ASP.NET Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-throttling-rate-limiting-for-asp-net-core.md)
-* [Throttling / Rate Limiting for ASP.NET Full Framework](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-throttling-rate-limiting-for-asp-net-full-framework.md)
 * [Versioning Setup for OData on ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-versioning-setup-for-asp-net-core.md)
 * [Versioning Usage](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-versioning-usage.md)
 
@@ -50,6 +47,7 @@
 ## Git
 
 * [GIT Branching Recommendations](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-branching-recommendations/git-branching-recommendations.md)
+* [GIT Tips](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-tips.md)
 
 ## Training
 

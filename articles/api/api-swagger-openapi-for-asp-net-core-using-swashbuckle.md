@@ -1,8 +1,6 @@
 # API - Swagger/Open API for ASP.Net Core using Swashbuckle
 
-As of the time of this writing (3/1/2019), Swashbuckle and OData both fully support ASP.Net Core 2.x and above, but they do not fully support one another.  If adding Swashbuckle to an existing OData API, please first follow the document titled [OData Versioning Setup for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/api-odata-versioning-setup-for-asp-net-core.md).
-
-This document will not only cover a standard installation of Swashbuckle on ASP.Net Core, but all steps needed to ensure it works well with OData
+This document will not only cover a standard installation of Swashbuckle on ASP.Net Core 3.1, but all steps needed to ensure it works well with OData
 
 ## Swashbuckle Implementation Steps
 
@@ -23,11 +21,13 @@ Swashbuckle.AspNetCore.Annotations
 3. In the `Classes` folder (create if needed), add a new class named `ConfigureSwaggerOptions` with the following code (adjusting descriptive content as needed):
 
 ```cs
+namespace API.Classes {
     using Microsoft.AspNetCore.Mvc.ApiExplorer;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Options;
-    using Swashbuckle.AspNetCore.Swagger;
+    using Microsoft.OpenApi.Models;
     using Swashbuckle.AspNetCore.SwaggerGen;
+    using System;
 
     /// <summary>
     /// Configures the Swagger generation options.
@@ -52,64 +52,105 @@ Swashbuckle.AspNetCore.Annotations
             }
         }
 
-        static Info CreateInfoForApiVersion(ApiVersionDescription description) {
-            var info = new Info() {
+        static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description) {
+            var info = new OpenApiInfo() {
                 Title = "OData, Open API, .Net Core demo and training API",
                 Version = description.ApiVersion.ToString(),
                 Description = "OData, Open API, .Net Core demo and training API",
-                Contact = new Contact() { Name = "Paul Gilchrist", Email = "paul.gilchrist@outlook.com" },
-                TermsOfService = "Shareware",
-                License = new License() { Name = "MIT", Url = "https://opensource.org/licenses/MIT" }
+                Contact = new OpenApiContact() { Name = "Paul Gilchrist", Email = "paul.gilchrist@outlook.com" },
+                License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
             };
-            if (description.IsDeprecated) {
-                info.Description += " This API version has been deprecated.";
+            if (description.ApiVersion.MajorVersion<2 ) {
+                info.Description = "This API version has been deprecated.  Please use version V2";
+            }
+            if (description.ApiVersion.MajorVersion > 2) {
+                info.Description = "This API version is in preview.  Please use version V2 for production applications";
             }
             return info;
         }
     }
+}
 ```
 
 4. In the `Classes` folder, add a new class named `SwaggerDefaultValues` with the following code (adjusting descriptive content as needed):
 
 ```cs
-    using Swashbuckle.AspNetCore.Swagger;
-    using Swashbuckle.AspNetCore.SwaggerGen;
-    using System.Linq;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Linq;
 
+namespace API.Classes {
     /// <summary>
     /// Represents the Swagger/Swashbuckle operation filter used to document the implicit API version parameter.
     /// </summary>
-    /// <remarks>This <see cref="IOperationFilter"/> is only required due to bugs in the <see cref="SwaggerGenerator"/>.
-    /// Once they are fixed and published, this class can be removed.</remarks>
     public class SwaggerDefaultValues : IOperationFilter {
         /// <summary>
         /// Applies the filter to the specified operation using the given context.
         /// </summary>
         /// <param name="operation">The operation to apply the filter to.</param>
         /// <param name="context">The current operation filter context.</param>
-        public void Apply(Operation operation, OperationFilterContext context) {
+        public void Apply(OpenApiOperation operation, OperationFilterContext context) {
             var apiDescription = context.ApiDescription;
-            //operation.Deprecated = apiDescription.IsDeprecated();
+            operation.Deprecated |= apiDescription.IsDeprecated();
             if (operation.Parameters == null) {
                 return;
             }
             // REF: https://github.com/domaindrivendev/Swashbuckle.AspNetCore/issues/412
             // REF: https://github.com/domaindrivendev/Swashbuckle.AspNetCore/pull/413
-            foreach (var parameter in operation.Parameters.OfType<NonBodyParameter>()) {
+            foreach (var parameter in operation.Parameters) {
                 var description = apiDescription.ParameterDescriptions.First(p => p.Name == parameter.Name);
                 if (parameter.Description == null) {
                     parameter.Description = description.ModelMetadata?.Description;
                 }
-                if (parameter.Default == null) {
-                    parameter.Default = description.DefaultValue;
+                if (parameter.Schema.Default == null && description.DefaultValue != null) {
+                    parameter.Schema.Default = new OpenApiString(description.DefaultValue.ToString());
                 }
                 parameter.Required |= description.IsRequired;
             }
         }
     }
+}
 ```
 
-5. In file `Startup.cs` add a new function to the `Startup` classas follows:
+5. In the `Classes` folder, add a new class named `SwaggerIgnoreFilter` with the following code (adjusting descriptive content as needed):
+
+```cs
+using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Linq;
+using System.Reflection;
+
+namespace API.Classes {
+
+    public class SwaggerIgnoreFilter : ISchemaFilter {
+        public void Apply(OpenApiSchema schema, SchemaFilterContext context) {
+            if (schema?.Properties == null || schema.Properties.Count == 0) {
+                return;
+            }
+            // Hide all models except enums to reduce the browser memory consumption from Swagger UI showing deep nested models
+            var excludedList = context.Type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(t => t.PropertyType.FullName.Contains("API.Models") && !t.PropertyType.FullName.Contains("Enums"))
+                .Select(m => (m.GetCustomAttribute<JsonPropertyAttribute>()?.PropertyName ?? m.Name.ToCamelCase()));
+            foreach (var excludedName in excludedList) {
+                if (schema.Properties.ContainsKey(excludedName))
+                    schema.Properties.Remove(excludedName);
+            }
+        }
+    }
+
+    internal static class StringExtensions {
+        internal static string ToCamelCase(this string value) {
+            if (string.IsNullOrEmpty(value)) return value;
+            return char.ToLowerInvariant(value[0]) + value.Substring(1);
+        }
+    }
+}
+```
+
+6. In file `Startup.cs` add a new function to the `Startup` classas follows:
 
 ```cs
 static string XmlCommentsFilePath {
@@ -121,21 +162,37 @@ static string XmlCommentsFilePath {
 }
 ```
 
-6. In file `Startup.cs` and function `ConfigureServices`, just under the section `services.AddODataApiExplorer();`, place the following code:
+7. In file `Startup.cs` and function `ConfigureServices`, just under the section `services.AddODataApiExplorer();`, place the following code:
 
 ```cs
 services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 // Register the Swagger generator, defining 1 or more Swagger documents
 services.AddSwaggerGen(options => {
-    // add a custom operation filter which sets default values
-    options.OperationFilter<SwaggerDefaultValues>();
-    options.CustomSchemaIds((x) => x.Name + "_" + Guid.NewGuid());
-    // integrate xml comments
+    // Integrate xml comments (application properties/build tab/output path)
     options.IncludeXmlComments(XmlCommentsFilePath);
+    // Add a custom operation filter which sets default values
+    options.OperationFilter<SwaggerDefaultValues>();
+    // Configure Swagger to filter out $expand objects to improve performance for large highly relational APIs
+    options.SchemaFilter<SwaggerIgnoreFilter>();
+    // The following two options are only needed is using "Basic" security
+    options.AddSecurityDefinition("Basic", new OpenApiSecurityScheme() { In = ParameterLocation.Header, Description = "Please insert Basic token into field", Name = "Authorization", Type = SecuritySchemeType.ApiKey });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Basic"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
 });
 ```
 
-7. In file `Startup.cs` and function `Configure()`, just under the section `services.UseMvc();`, place the following code:
+8. In file `Startup.cs` and function `Configure()`, just under the section `services.UseMvc();`, place the following code:
 
 ```cs
 // Enable middleware to serve generated Swagger as a JSON endpoint.
@@ -147,76 +204,185 @@ app.UseSwaggerUI(options => {
             $"/swagger/{description.GroupName}/swagger.json",
             description.GroupName.ToUpperInvariant());
     }
+    options.DefaultModelExpandDepth(2);
+    options.DefaultModelsExpandDepth(-1);
+    options.DefaultModelRendering(ModelRendering.Model);
+    options.DisplayRequestDuration();
     options.DocExpansion(DocExpansion.None);
 });
 ```
 
-9. Ensure each OData controller HTTP action function implements the following comments and attributes appropriate for the given action.  Below are examples of the most common comments and attributes used for each action type.
+9. Ensure each object model implements the following comments appropriate for the given property.  Below is an example object model showing OpenAPI compatible comments.
 
 ```cs
-/// <summary>Query users</summary>
-[HttpGet]
-[Route("odata/users")]
-[ProducesResponseType(typeof(IEnumerable<User>), 200)] // Ok
-[ProducesResponseType(typeof(void), 404)]  // Not Found
-[EnableQuery]
+    /// <summary>
+    /// Represents a user
+    /// </summary>
+    [Select]
+    public class User {
+        public User() { }
 
-/// <summary>Query users by id</summary>
-/// <param name="id">The user id</param>
-[HttpGet]
-[Route("odata/users({id})")]
-[ProducesResponseType(typeof(User), 200)] // Ok
-[ProducesResponseType(typeof(void), 404)] // Not Found
-[EnableQuery(AllowedQueryOptions = AllowedQueryOptions.Select | AllowedQueryOptions.Expand)]
+        /// <summary>
+        /// Gets or sets the user identifier
+        /// </summary>
+        [Key]
+        public int Id { get; set; }
 
-/// <summary>Create a new user</summary>
-/// <remarks>
-/// Make sure to secure this action before production release
-/// </remarks>
-/// <param name="user">A full user object</param>
-[HttpPost]
-[Route("odata/users({id})")]
-[ProducesResponseType(typeof(User), 201)] // Created
-[ProducesResponseType(typeof(ModelStateDictionary), 400)] // Bad Request
-[ProducesResponseType(typeof(void), 401)] // Unauthorized
+        /// <summary>
+        /// Gets or sets the user's first name
+        /// </summary>
+        /// <value>The user's first name.</value>
+        [Required]
+        [Display(Name = "First Name")]
+        [StringLength(50, MinimumLength=2, ErrorMessage="Must be between 2 and 50 characters")]
+        public string FirstName { get; set; }
 
-/// <summary>Edit the user with the given id</summary>
-/// <remarks>
-/// Make sure to secure this action before production release
-/// </remarks>
-/// <param name="id">The user id</param>
-/// <param name="userDelta">A partial user object.  Only properties supplied will be updated.</param>
-[HttpPatch]
-[Route("odata/users({id})")]
-[ProducesResponseType(typeof(User), 200)] // Ok
-[ProducesResponseType(typeof(ModelStateDictionary), 400)] // Bad Request
-[ProducesResponseType(typeof(void), 401)] // Unauthorized
-[ProducesResponseType(typeof(void), 404)] // Not Found
+        /// <summary>
+        /// Gets or sets the user's middle name or initial
+        /// </summary>
+        /// <value>The user's middle name or initial.</value>
+        [Display(Name = "Middle Name")]
+        [StringLength(50, MinimumLength=1, ErrorMessage="Must be between 1 and 50 characters")]
+        public string MiddleName { get; set; }
 
-/// <summary>Replace all data for the user with the given id</summary>
-/// <remarks>
-/// Make sure to secure this action before production release
-/// </remarks>
-/// <param name="id">The user id</param>
-/// <param name="user">A full user object.  Every property will be updated except id.</param>
-[HttpPut]
-[Route("odata/users({id})")]
-[ProducesResponseType(typeof(User), 200)] // Ok
-[ProducesResponseType(typeof(ModelStateDictionary), 400)] // Bad Request
-[ProducesResponseType(typeof(void), 401)] // Unauthorized
-[ProducesResponseType(typeof(void), 404)] // Not Found
+        /// <summary>
+        /// Gets or sets the user's last name
+        /// </summary>
+        /// <value>The user's last name.</value>
+        [Required]
+        [Display(Name = "Last Name")]
+        [StringLength(50, MinimumLength=2, ErrorMessage="Must be between 2 and 50 characters")]
+        public string LastName { get; set; }
 
-/// <summary>Delete the given user</summary>
-/// <remarks>
-/// Make sure to secure this action before production release
-/// </remarks>
-/// <param name="id">The user id</param>
-[HttpDelete]
-[Route("odata/users({id})")]
-[ProducesResponseType(typeof(void), 204)] // No Content
-[ProducesResponseType(typeof(void), 401)] // Unauthorized
-[ProducesResponseType(typeof(void), 404)] // Not Found
+        /// <summary>
+        /// Gets or sets the user's email address
+        /// </summary>
+        /// <value>The user's email address.</value>
+        [StringLength(150, MinimumLength=3)]
+        public string Email { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user's primary phone number
+        /// </summary>
+        /// <value>The user's primary phone number.</value>
+        [StringLength(20, MinimumLength=7)]
+        public string Phone { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date and time when the address was first created
+        /// </summary>
+        /// <value>The address's created date (in UTC)</value>
+        public System.DateTime CreatedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of who created the address
+        /// </summary>
+        /// <value>The address's createdBy name (in UTC)</value>
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "CreatedBy must be between 1 and 50 characters")]
+        public string CreatedBy { get; set; }
+
+        /// <summary>
+        /// Gets or sets the date and time when the address was last modified
+        /// </summary>
+        /// <value>The address's last modified date (in UTC)</value>
+        public System.DateTime LastModifiedDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of who last modified the address
+        /// </summary>
+        /// <value>The address's lastModifiedBy name (in UTC)</value>
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "LastModifiedBy must be between 1 and 50 characters")]
+        public string LastModifiedBy { get; set; }
+
+        /// <summary>
+        /// Gets a list of addresses for this user
+        /// </summary>
+        /// <value>The <see cref="IList{T}">list</see> of <see cref="Address">addresses</see>.</value>
+        [Contained]
+        public List<Address> Addresses { get; set; } = new List<Address>();
+
+        /// <summary>
+        /// Gets a list of notes for this user
+        /// </summary>
+        /// <value>The <see cref="IList{T}">list</see> of <see cref="UserNote">notes</see>.</value>
+        [Contained]
+        public List<UserNote> Notes { get; set; } = new List<UserNote>();
+
+    }
 ```
+
+10. Ensure each OData controller implements the following comments and attributes appropriate for the given HTTP action/function.  It is especially important to all the `[Produces("application/json")]` attribute, as without it, Swagger will not show the object model being returned.  Below are examples of the most common comments and attributes used for each action type.
+
+```cs
+        /// <summary>Query users</summary>
+        /// <returns>A list of users</returns>
+        /// <response code="200">The users were successfully retrieved</response>
+        [HttpGet]
+        [ODataRoute("")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(IEnumerable<User>), 200)] // Ok
+        [EnableQuery]
+
+        /// <summary>Query users by id</summary>
+        /// <param name="id">The user id</param>
+        /// <returns>A single user</returns>
+        /// <response code="200">The user was successfully retrieved</response>
+        /// <response code="404">The user was not found</response>
+        [HttpGet]
+        [ODataRoute("({id})")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(User), 200)] // Ok
+        [ProducesResponseType(typeof(void), 404)] // Not Found
+        [EnableQuery]
+
+        /// <summary>Create a new user</summary>
+        /// <param name="user">A full user object</param>
+        /// <returns>A new user</returns>
+        /// <response code="201">The user was successfully created</response>
+        /// <response code="400">The user is invalid</response>
+        /// <response code="401">Authentication required</response>
+        /// <response code="403">Access denied due to inadaquate claim roles</response>
+        [HttpPost]
+        [ODataRoute("")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(IEnumerable<User>), 201)] // Created
+        [ProducesResponseType(typeof(ModelStateDictionary), 400)] // Bad Request
+        [ProducesResponseType(typeof(void), 401)] // Unauthorized
+
+        /// <summary>Edit user</summary>
+        /// <param name="id">The user id</param>
+        /// <param name="userDelta">A partial user object.  Only properties supplied will be updated.</param>
+        /// <returns>An updated user</returns>
+        /// <response code="200">The user was successfully updated</response>
+        /// <response code="400">The user is invalid</response>
+        /// <response code="401">Authentication required</response>
+        /// <response code="403">Access denied due to inadaquate claim roles</response>
+        /// <response code="404">The user was not found</response>
+        [HttpPatch]
+        [ODataRoute("({id})")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(User), 200)] // Ok
+        [ProducesResponseType(typeof(ModelStateDictionary), 400)] // Bad Request
+        [ProducesResponseType(typeof(void), 401)] // Unauthorized - User not authenticated
+        [ProducesResponseType(typeof(ForbiddenException), 403)] // Forbidden - User does not have required claim roles
+        [ProducesResponseType(typeof(void), 404)] // Not Found
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme + ",BasicAuthentication", Roles = "Admin")]
+
+        /// <summary>Delete the given user</summary>
+        /// <param name="id">The user id</param>
+        /// <response code="204">The user was successfully deleted</response>
+        /// <response code="401">Authentication required</response>
+        /// <response code="403">Access denied due to inadaquate claim roles</response>
+        /// <response code="404">The user was not found</response>
+        [HttpDelete]
+        [ODataRoute("({id})")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(void), 204)] // No Content
+        [ProducesResponseType(typeof(void), 401)] // Unauthorized
+        [ProducesResponseType(typeof(void), 404)] // Not Found
+```
+
+11. Ensure in your OData Model Configurations that all `EntitySet` names must match their respective controller names, and these names must be case sensitive or objects passed in the body [FromBody] will show in Swagger as if their properties mustbe passed in the querystring (query).  The name does not have to match the route, allowing routes to still be in camelCase even though the controller and EntitySet names will be in PascalCase.
 
 ## References
 

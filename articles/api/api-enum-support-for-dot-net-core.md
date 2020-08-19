@@ -34,7 +34,7 @@ modelBuilder.Entity<Address>().Property(c => c.Type).HasConversion<int>(); // St
 address.Type = Address.AddressType.Residential;
 ```
 
-4. In the `Startup` class, `ConfigureServices()` function, `AddSwaggerGen()` section, add the following line to show the enum as a string in all Swagger documentation:
+4. If using a version of .Net Core older than version 3.1, then in the `Startup` class, `ConfigureServices()` function, `AddSwaggerGen()` section, add the following line to show the enum as a string in all Swagger documentation:
 
 ```cs
 options.DescribeAllEnumsAsStrings();

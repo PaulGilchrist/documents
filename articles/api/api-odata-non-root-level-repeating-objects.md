@@ -39,16 +39,23 @@ context.AddressNotes.Add(new AddressNote { Address = context.Addresses.Find(1), 
 
 ```cs
 /// <summary>Query user notes</summary>
+/// <returns>A list of notes</returns>
+/// <response code="200">The notes were successfully retrieved</response>
 [HttpGet]
-[ODataRoute("users({id})/notes")]
+[ODataRoute("({id})/notes")]
 [ProducesResponseType(typeof(IEnumerable<UserNote>), 200)] // Ok
 [ProducesResponseType(typeof(void), 404)]  // Not Found
-[EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All, MaxNodeCount = 100000)]
+[EnableQuery]
 public async Task<IActionResult> GetNotes([FromRoute] int id) {
-    var notes = _db.UserNotes;
-    if (!await notes.AnyAsync(n => n.User.Id == id)) {
-        return NotFound();
+    try {
+        var notes = _db.UserNotes;
+        if (!await notes.AnyAsync(n => n.User.Id==id)) {
+            return NotFound();
+        }
+        return Ok(notes);
+    } catch (Exception ex) {
+        _telemetryTracker.TrackException(ex);
+        return StatusCode(500, ex.Message+Constants.messageAppInsights);
     }
-    return Ok(notes);
 }
 ```

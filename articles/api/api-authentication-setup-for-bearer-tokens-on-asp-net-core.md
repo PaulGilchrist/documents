@@ -51,7 +51,9 @@ To setup OAuth 2.0 JWT token security with ASP.NET 2.0 and above, follow the bel
 
    * Notice that multiple `AllowedAudiences` are supported when separating them by a `","`
 
-2. In file `Startup.cs` function `ConfigureServices` add the following code:
+2. Add NuGet package named `Microsoft.AspNetCore.Authentication.JwtBearer`.
+
+3. In file `Startup.cs` function `ConfigureServices` add the following code:
 
 ```cs
 // Configure OAuth Authentication
@@ -64,14 +66,14 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
    });
 ```
 
-3. In file `Startup.cs` function `Configure` just above `app.UseMvc` add the following code (if not already existing):
+4. In file `Startup.cs` function `Configure()` above `app.UseMvc` add the following code (if not already existing):
 
 ```cs
 app.UseAuthentication();
 ```
 
-4. On any API controller endpoint requiring security, add the `[Authorize]` annotation with or without `roles` as required.
-5. Add `/// <remarks>` comments above the function noting the required roles when using Swagger/Open API
+5. On any API controller endpoint requiring security, add the `[Authorize]` annotation with or without `roles` as required.
+6. Add `/// <remarks>` comments above the function noting the required roles when using Swagger/Open API
 
 For even more granular security, if you want direct acces to role membership with a function, it can be accessed as follows:
 

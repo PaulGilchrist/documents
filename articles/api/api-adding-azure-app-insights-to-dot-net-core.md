@@ -4,10 +4,12 @@ Azure Application Insights allows for collecting, reporting, and alerting on bot
 
 1. Add the NuGet package named `Microsoft.ApplicationInsights.AspNetCore`
 
-2. Create a new class using the below code:
+2. Create a new class named `TelemetryInitializer` using the below code:
    * This class will be used to insert user information into the telemetry data.
 
 ```c#
+// https://github.com/Microsoft/ApplicationInsights-aspnetcore/issues/562
+
 using Microsoft.ApplicationInsights.Channel;
 using Microsoft.ApplicationInsights.DataContracts;
 using Microsoft.ApplicationInsights.Extensibility;
@@ -15,16 +17,22 @@ using Microsoft.AspNetCore.Http;
 
 namespace API.Classes {
     public class TelemetryInitializer : ITelemetryInitializer {
-        IHttpContextAccessor httpContextAccessor;
+        IHttpContextAccessor _httpContextAccessor;
 
         public TelemetryInitializer(IHttpContextAccessor httpContextAccessor) {
-            this.httpContextAccessor = httpContextAccessor;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public void Initialize(ITelemetry telemetry) {
-            var requestTelemetry = telemetry as RequestTelemetry;
-            if (httpContextAccessor.HttpContext != null && httpContextAccessor.HttpContext.User.Identity.Name != null) {
-                requestTelemetry.Context.User.Id = httpContextAccessor.HttpContext.User.Identity.Name;
+            RequestTelemetry requestTelemetry = telemetry as RequestTelemetry;
+            if (requestTelemetry != null && _httpContextAccessor.HttpContext != null) {
+                if (_httpContextAccessor.HttpContext.User.Identity.Name != null) {
+                    requestTelemetry.Context.User.Id = _httpContextAccessor.HttpContext.User.Identity.Name;
+                    requestTelemetry.Context.User.AuthenticatedUserId = _httpContextAccessor.HttpContext.User.Identity.Name;
+                }
+                if (_httpContextAccessor.HttpContext.Items.ContainsKey("RequestBody")) {
+                    requestTelemetry.Properties.Add("body", (string)_httpContextAccessor.HttpContext.Items["RequestBody"]);
+                }
             }
         }
     }
@@ -42,7 +50,7 @@ services.AddHttpContextAccessor();
 5. Make sure the following code is added above `UseMvc` and within the `Configure()` function of the `Startup.cs` file
 
 ```c#
- // Add custom telemetry initializer to add user name from the HTTP context
+// Add custom telemetry initializer to add user name from the HTTP context
 var configuration = app.ApplicationServices.GetService<TelemetryConfiguration>();
 configuration.TelemetryInitializers.Add(new TelemetryInitializer(httpContextAccessor));
 ```

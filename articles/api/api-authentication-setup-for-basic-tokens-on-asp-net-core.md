@@ -1,6 +1,6 @@
 # Authentication Setup for Basic Tokens on ASP.Net Core
 
-ASP.NET 2.x has great support for consuming and validating the HTTP `Authorization` header.  This document will discuss adding support for `Basic` authentication.  Basic authentication is frequently used as API keys to allow API to API communication, where `OAuth` would be more appropriate for User/Browser to server communication to best ensure the ability to protect the key.  In every case, `Basic` authentication should only be passed across an encrypted connection.
+.Net Core 3.1 has great support for consuming and validating the HTTP `Authorization` header.  This document will discuss adding support for `Basic` authentication.  Basic authentication is frequently used as API keys to allow API to API communication, where `OAuth` would be more appropriate for User/Browser to server communication to best ensure the ability to protect the key.  In every case, `Basic` authentication should only be passed across an encrypted connection.
 
 After receiving the token, any function, class, or the entire application can be secured by adding the [Authorize] attribute above the function or class.  If no token was received, or the token was invalid, ASP.Net will send a `401 unauthorized` response.  
 
@@ -20,7 +20,7 @@ Write-Output "<!--$EncodedUsernamePassword $($Credential.UserName):$($Credential
 Write-Output "Authorization: Basic $EncodedUsernamePassword"
 ```
 
-4. Add the Bsic token to the project's `appsettings.json` file within the `Security` section (create if needed) using the property name `AllowedApiKeys`, as in the below example:
+4. Add the Basic token to the project's `appsettings.json` file within the `Security` section (create if needed) using the property name `AllowedApiKeys`, as in the below example:
 
 ```json
   "Security": {
