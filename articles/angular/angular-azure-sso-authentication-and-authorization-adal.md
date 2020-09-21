@@ -1,4 +1,4 @@
-# Angular Azure SSO Authentication and Authorization
+# Angular Azure SSO Authentication and Authorization (adal-angular4)
 
 ## Steps to implement Azure SSO Authentication and Authorization in Angular
 

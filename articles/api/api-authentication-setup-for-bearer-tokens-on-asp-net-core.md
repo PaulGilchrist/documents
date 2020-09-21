@@ -56,14 +56,26 @@ To setup OAuth 2.0 JWT token security with ASP.NET 2.0 and above, follow the bel
 3. In file `Startup.cs` function `ConfigureServices` add the following code:
 
 ```cs
-// Configure OAuth Authentication
-services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-   .AddJwtBearer(options => {
-      options.Authority = "https://login.microsoftonline.com/" + Configuration.GetValue<string>("Security:TenantIdentifier");
-      options.TokenValidationParameters = new TokenValidationParameters {
-         ValidAudiences = Configuration.GetValue<string>("Security:AllowedAudiences").Split(',')
-      };
-   });
+    // ADAL uses v1.0 and MSAL uses v2.0
+    List<string> ValidIssuers = new List<string>();
+    ValidIssuers.Add("https://login.microsoftonline.com/" + Configuration.GetValue<string>("Security:TenantIdentifier"));
+    ValidIssuers.Add("https://login.microsoftonline.com/" + Configuration.GetValue<string>("Security:TenantIdentifier") + "/v2.0");
+    /*
+        * IssuerSigningKeys needed for access tokens but not for id tokens
+        * Keys are at these two locations, but keys should be the same at both URLs:
+        * https://login.microsoftonline.com/mytenant.onmicrosoft.com/discovery/keys
+        * https://login.microsoftonline.com/mytenant.onmicrosoft.com/discovery/v2.0/keys
+        * Use the "kid" values
+    */
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        // Configure OAuth Authentication
+        .AddJwtBearer(options => {
+            options.Authority = "https://login.microsoftonline.com/" + Configuration.GetValue<string>("Security:TenantIdentifier");
+            options.TokenValidationParameters = new TokenValidationParameters {
+                ValidAudiences = Configuration.GetValue<string>("Security:AllowedAudiences").Split(','),
+                ValidIssuers = ValidIssuers
+            };
+        });
 ```
 
 4. In file `Startup.cs` function `Configure()` above `app.UseMvc` add the following code (if not already existing):

@@ -1,6 +1,6 @@
 # GIT Tips
 
-## Deleting a atory/feature branch after merge
+## Deleting a story/feature branch after merge
 
 ```js
 // Delete a remote branch
