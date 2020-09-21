@@ -14,7 +14,9 @@
 
 ```javascript
 import { MsalModule } from '@azure/msal-angular';
+...
 imports: [
+    ...
     MsalModule.forRoot({
         auth: {
             clientId: environment.azureAuthProvider.clientId,
@@ -33,7 +35,7 @@ imports: [
         protectedResourceMap: [],
         extraQueryParameters: {}
     }),
-
+    ...
 ]
 ```
 
@@ -53,7 +55,9 @@ azureAuthProvider: {
 
 ```javascript
 import { MsalService } from '@azure/msal-angular';
+...
 constructor(public authService: MsalService) {}
+
 ngOnInit(): void {
     const url = localStorage.getItem('url');
     if (url != null) {
@@ -62,13 +66,16 @@ ngOnInit(): void {
     }
     ...
 }
+
 login(): void {
     localStorage.setItem('url', this.router.url);
     this.authService.loginPopup();
 }
+
 logout(): void {
     this.authService.logout();
 }
+
 get authenticated(): boolean {
     return !!this.authService.getAccount();
 }
@@ -77,13 +84,14 @@ get authenticated(): boolean {
 7. Add the following to the main navigation bar component's HTML template (usually `nav-top.component.html`).  When adding this code, do not remove any existing parameters or functionality in the constructor or `ngOnInit` functions
 
 ```javascript
+<div *ngIf="authenticated" class="nav navbar-right hidden-xs hidden-sm text-light">
+    {{ authService.getAccount().name }}
+</div>
+...
 <form class="navbar-form navbar-right">
 	<input *ngIf="!authenticated" (click)="login()" type="button" class="btn btn-primary" value="Login">
 	<input *ngIf="authenticated" (click)="logout()" type="button" class="btn sm btn-default" value="Logout">
 </form>
-<div *ngIf="authenticated" class="nav navbar-right hidden-xs hidden-sm text-light">
-    {{ authService.getAccount().name }}
-</div>
 ```
 
 8. You can also optionally show/hide navigation items using standard `*ngIf="authenticated"`
