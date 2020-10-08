@@ -45,6 +45,12 @@
 
 * [Using Docker on Windows](https://github.com/PaulGilchrist/documents/blob/master/articles/containers/docker-on-windows.md)
 
+## External API
+
+* [Alpha-Vision API Integration](https://github.com/PaulGilchrist/documents/blob/master/articles/externalApi/alpha-vision-api.md)
+* [Cloudinary API Integration](https://github.com/PaulGilchrist/documents/blob/master/articles/externalApi/cloudinary-api.md)
+* [Wells Fargo e-Bill Express API Integration](https://github.com/PaulGilchrist/documents/blob/master/articles/externalApi/e-bill-express-api.md)
+
 ## Git
 
 * [GIT Branching Recommendations](https://github.com/PaulGilchrist/documents/blob/master/articles/git/git-branching-recommendations/git-branching-recommendations.md)
