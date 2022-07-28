@@ -1,6 +1,5 @@
 # OData $batch SAGA Support
 
-
 When an OData $batch contains a ChangeSet, every change within that set must succeed or every change must fail.  This is equally true for change notification messages, where no messages can be sent until all changes are successful, then all notifications must be sent together as their own set maintaining proper sequencing.  To support them, the message service must support immediate sending of event messages not part of a changeset, and delayed messages when part of a changeset.  The delayed messages would queue up and all be sent when the changeset if completed successfully, or never sent if the changeset fails.
 
 Below is example code showing a message service base class that has support for delayed messages:
