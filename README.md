@@ -4,8 +4,8 @@
 
 * [Adding Azure Application Insights](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-adding-azure-app-insights.md)
 * [Adding Bootstrap 4](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-adding-bootstrap-4.md)
-* [Azure SSO Authentication and Authorization (ADAL)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-azure-sso-authentication-and-authorization-adal.md)
-* [Azure SSO Authentication and Authorization (MSAL)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-azure-sso-authentication-and-authorization-msal.md)
+angular-azure-sso-authentication-and-authorization-msal.md)
+* [Azure SSO Authentication and Authorization (OIDC)](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-azure-sso-authentication-and-authorization-angular-oidc.md)
 * [Client Tools Setup](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-client-tools-setup.md)
 * [Creating Reusable NPM Packages](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-creating-reusable-npm-packages.md)
 * [Form Validation](https://github.com/PaulGilchrist/documents/blob/master/articles/angular/angular-form-validation.md)
@@ -25,6 +25,7 @@
 * [Caching](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-caching.md)
 * [Compression for IIS or NodeJS](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-compression-for-iis-or-nodejs.md)
 * [Enum Support for ASP.Net Core](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-enum-support-for-dot-net-core.md)
+* [OData $expand Security](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-$expand-security.md)
 * [OData Bulk Updates](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-bulk-updates.md)
 * [OData Efficient Use of Query Capabilities](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-efficient-use-of-query-capabilities.md)
 * [OData Non-Root Level Repeating Objects](https://github.com/PaulGilchrist/documents/blob/master/articles/api/api-odata-non-root-level-repeating-objects.md)
